@@ -1,0 +1,10 @@
+<Project>
+  <!--
+    Localization: English is the neutral language of the resources and lives in the main assembly.
+    Translations are satellite assemblies {culture}/*.resources.dll; NuGet packages bring only the supported languages.
+  -->
+  <PropertyGroup>
+    <NeutralLanguage>en</NeutralLanguage>
+    <SatelliteResourceLanguages>en;ru</SatelliteResourceLanguages>
+  </PropertyGroup>
+</Project>

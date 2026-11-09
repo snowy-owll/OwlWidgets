@@ -1,0 +1,666 @@
+<UserControl
+    x:Class="OwlWidgets.Widgets.SystemMonitor.ImHexCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:OwlWidgets.Widgets.SystemMonitor.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:OwlWidgets.Widgets.SystemMonitor.Properties;assembly=OwlWidgets.Widgets.SystemMonitor.Descriptor"
+    xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:ui="clr-namespace:OwlWidgets.UI.Common.Converters;assembly=OwlWidgets.UI.Common"
+    xmlns:vms="clr-namespace:OwlWidgets.Widgets.SystemMonitor.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vms:ContentViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OwlWidgets.UI.Common;component/Themes/Card.xaml" />
+                <ResourceDictionary Source="/OwlWidgets.Widgets.SystemMonitor;component/CardButtons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  The colours of the dark style of Dear ImGui, as ImHex has them  -->
+            <SolidColorBrush x:Key="ImDisabled" Color="#808080" />
+            <SolidColorBrush x:Key="ImTab" Color="#3369AD" />
+            <SolidColorBrush x:Key="ImHeader" Color="#4F4296FA" />
+            <SolidColorBrush x:Key="ImTableHead" Color="#303033" />
+            <SolidColorBrush x:Key="ImBorderStrong" Color="#4F4F59" />
+            <SolidColorBrush x:Key="ImBorderLight" Color="#3B3B40" />
+            <SolidColorBrush x:Key="ImRowAlt" Color="#0FFFFFFF" />
+            <SolidColorBrush x:Key="ImFrame" Color="#8A29497A" />
+            <SolidColorBrush x:Key="ImButtonHover" Color="#664296FA" />
+            <SolidColorBrush x:Key="ImButtonActive" Color="#0F87FA" />
+            <!--  The levels: the colours of the terminal styles (One Half Dark)  -->
+            <SolidColorBrush x:Key="LowBrush" Color="#98C379" />
+            <SolidColorBrush x:Key="MediumBrush" Color="#E5C07B" />
+            <SolidColorBrush x:Key="HighBrush" Color="#E06C75" />
+
+            <converters:UsageToBrushConverter
+                x:Key="UsageToBrush"
+                HighUsageBrush="{StaticResource HighBrush}"
+                LowUsageBrush="{StaticResource LowBrush}"
+                MediumUsageBrush="{StaticResource MediumBrush}" />
+            <converters:HeatToBrushConverter
+                x:Key="HeatToBrush"
+                HighBrush="{StaticResource HighBrush}"
+                LowBrush="{StaticResource LowBrush}"
+                MediumBrush="{StaticResource MediumBrush}" />
+            <converters:DeviceNameConverter x:Key="DeviceName" />
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibility" />
+
+            <!--  Column widths for about 6 characters of a drive name, 14 of a load name, 4 of a colour, 8 of a value and 5 of the min and max  -->
+            <GridLength x:Key="DriveNameWidth">46</GridLength>
+            <GridLength x:Key="LoadNameWidth">107</GridLength>
+            <GridLength x:Key="SwatchWidth">36</GridLength>
+            <GridLength x:Key="ValueWidth">64</GridLength>
+            <GridLength x:Key="RangeWidth">46</GridLength>
+
+            <!--  A collapsing header: the title on a translucent blue bar with an open arrow  -->
+            <Style x:Key="ImHeaderStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource ImHeader}" />
+                <Setter Property="Padding" Value="6,1" />
+                <Setter Property="Margin" Value="0,6,0,3" />
+            </Style>
+            <Style x:Key="ImArrowStyle" TargetType="TextBlock">
+                <Setter Property="Width" Value="18" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Text" Value="▼" />
+            </Style>
+            <Style x:Key="ImTableStyle" TargetType="Border">
+                <Setter Property="BorderBrush" Value="{StaticResource ImBorderStrong}" />
+                <Setter Property="BorderThickness" Value="1" />
+            </Style>
+            <!--  A header cell: the first one has no line on the left, the table has it  -->
+            <Style x:Key="ImHeadCellStyle" TargetType="Border">
+                <Setter Property="Background" Value="{StaticResource ImTableHead}" />
+                <Setter Property="BorderBrush" Value="{StaticResource ImBorderStrong}" />
+                <Setter Property="BorderThickness" Value="1,0,0,1" />
+                <Setter Property="Padding" Value="5,1" />
+            </Style>
+            <Style x:Key="ImCellStyle" TargetType="Border">
+                <Setter Property="BorderBrush" Value="{StaticResource ImBorderLight}" />
+                <Setter Property="BorderThickness" Value="1,0,0,0" />
+                <Setter Property="Padding" Value="5,1" />
+            </Style>
+            <Style
+                x:Key="ImBarCellStyle"
+                BasedOn="{StaticResource ImCellStyle}"
+                TargetType="Border">
+                <Setter Property="Padding" Value="2,1" />
+            </Style>
+            <Style x:Key="ImNameStyle" TargetType="TextBlock">
+                <Setter Property="Margin" Value="5,1" />
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+            </Style>
+            <!--  Every other row is a little lighter; the containers of an ItemsControl count it  -->
+            <Style x:Key="ImRowStyle" TargetType="Border">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource AncestorType=ContentPresenter}}" Value="1">
+                        <Setter Property="Background" Value="{StaticResource ImRowAlt}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--  A progress bar of ImGui: the bar over the frame colour, the text in the middle stands over it apart  -->
+            <Style x:Key="ImProgressStyle" TargetType="ProgressBar">
+                <Setter Property="Maximum" Value="100" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ProgressBar">
+                            <Grid Background="{StaticResource ImFrame}">
+                                <Border x:Name="PART_Track" />
+                                <Border
+                                    x:Name="PART_Indicator"
+                                    HorizontalAlignment="Left"
+                                    Background="{TemplateBinding Foreground}"
+                                    Opacity="0.8" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="ImBarTextStyle" TargetType="TextBlock">
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Margin" Value="0,1" />
+            </Style>
+
+            <!--  The card buttons: ImGui buttons in place of the close cross of the window, or in the status bar  -->
+            <sys:Double x:Key="CornerIconSize">11</sys:Double>
+            <Style x:Key="CornerButtonStyle" TargetType="Button">
+                <Setter Property="Foreground" Value="#9A9A9A" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Padding="5,3" Background="{TemplateBinding Background}">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="White" />
+                        <Setter Property="Background" Value="{StaticResource ImButtonHover}" />
+                    </Trigger>
+                    <Trigger Property="IsPressed" Value="True">
+                        <Setter Property="Background" Value="{StaticResource ImButtonActive}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+            <ui:EqualsToVisibilityConverter x:Key="EqualsToVisibility" />
+
+            <!--  The window tab with the name of the widget; the buttons beside it in a top corner  -->
+            <DataTemplate x:Key="TabBar" DataType="{x:Type vms:ContentViewModel}">
+                <Grid Margin="0,0,0,4">
+                    <Border
+                        Height="2"
+                        VerticalAlignment="Bottom"
+                        Background="{StaticResource ImTab}" />
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal">
+                        <ContentControl
+                            Margin="0,0,4,3"
+                            Content="{Binding}"
+                            ContentTemplate="{StaticResource CardButtons}"
+                            Focusable="False"
+                            Visibility="{Binding ButtonCorner, Converter={StaticResource EqualsToVisibility}, ConverterParameter=TopLeft}" />
+                        <Border Padding="10,1" Background="{StaticResource ImTab}">
+                            <TextBlock Text="{x:Static p:Strings.Name}" />
+                        </Border>
+                    </StackPanel>
+                    <ContentControl
+                        Margin="0,0,0,3"
+                        HorizontalAlignment="Right"
+                        Content="{Binding}"
+                        ContentTemplate="{StaticResource CardButtons}"
+                        Focusable="False"
+                        Visibility="{Binding ButtonCorner, Converter={StaticResource EqualsToVisibility}, ConverterParameter=TopRight}" />
+                </Grid>
+            </DataTemplate>
+
+            <!--  The buttons in a bottom corner, at the side of their corner  -->
+            <Style x:Key="BottomButtonsStyle" TargetType="ContentControl">
+                <Setter Property="ContentTemplate" Value="{StaticResource CardButtons}" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="DockPanel.Dock" Value="Right" />
+                <Setter Property="VerticalAlignment" Value="Bottom" />
+                <Setter Property="Margin" Value="8,0,0,0" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ButtonsAtLeft}" Value="True">
+                        <Setter Property="DockPanel.Dock" Value="Left" />
+                        <Setter Property="Margin" Value="0,0,8,0" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding ButtonsAtTop}" Value="True">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--  A value of the collapsed card: a load as a small bar with the percent over it, a temperature as a swatch and the degrees  -->
+            <DataTemplate x:Key="CollapsedValue" DataType="{x:Type vms:CollapsedValue}">
+                <StackPanel
+                    Margin="0,2,14,2"
+                    Background="Transparent"
+                    Orientation="Horizontal"
+                    ToolTip="{Binding ToolTip}">
+                    <TextBlock Margin="0,0,6,0" Text="{Binding Label}" />
+                    <Grid x:Name="Load" Width="48">
+                        <ProgressBar
+                            x:Name="Bar"
+                            Foreground="{StaticResource ImDisabled}"
+                            Style="{StaticResource ImProgressStyle}"
+                            Value="{Binding Value, Mode=OneWay, TargetNullValue=0}" />
+                        <TextBlock Style="{StaticResource ImBarTextStyle}" Text="{Binding Text}" />
+                    </Grid>
+                    <StackPanel x:Name="Heat" Orientation="Horizontal" Visibility="Collapsed">
+                        <Border
+                            x:Name="Swatch"
+                            Width="11"
+                            Height="11"
+                            Margin="0,0,6,0"
+                            BorderBrush="{StaticResource ImBorderStrong}"
+                            BorderThickness="1" />
+                        <TextBlock x:Name="Degrees" Text="{Binding Value, StringFormat={}{0:0} °C}" />
+                    </StackPanel>
+                </StackPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IsTemperature}" Value="True">
+                        <Setter TargetName="Load" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="Heat" Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Value}" Value="{x:Null}">
+                        <Setter TargetName="Degrees" Property="Text" Value="{Binding Text}" />
+                        <Setter TargetName="Degrees" Property="Foreground" Value="{StaticResource ImDisabled}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Level}" Value="Low">
+                        <Setter TargetName="Bar" Property="Foreground" Value="{StaticResource LowBrush}" />
+                        <Setter TargetName="Swatch" Property="Background" Value="{StaticResource LowBrush}" />
+                        <Setter TargetName="Swatch" Property="BorderThickness" Value="0" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Level}" Value="Medium">
+                        <Setter TargetName="Bar" Property="Foreground" Value="{StaticResource MediumBrush}" />
+                        <Setter TargetName="Swatch" Property="Background" Value="{StaticResource MediumBrush}" />
+                        <Setter TargetName="Swatch" Property="BorderThickness" Value="0" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Level}" Value="High">
+                        <Setter TargetName="Bar" Property="Foreground" Value="{StaticResource HighBrush}" />
+                        <Setter TargetName="Swatch" Property="Background" Value="{StaticResource HighBrush}" />
+                        <Setter TargetName="Swatch" Property="BorderThickness" Value="0" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+
+            <!--  A load: the name and the bar with the percent over it  -->
+            <DataTemplate x:Key="GpuRow" DataType="{x:Type vms:GpuUsageInfo}">
+                <Border Style="{StaticResource ImRowStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource LoadNameWidth}" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Style="{StaticResource ImNameStyle}"
+                            Text="{Binding Name, Converter={StaticResource DeviceName}, ConverterParameter=tag}"
+                            ToolTip="{Binding Name}" />
+                        <Border Grid.Column="1" Style="{StaticResource ImBarCellStyle}">
+                            <Grid>
+                                <ProgressBar
+                                    Foreground="{Binding UsagePercentage, Converter={StaticResource UsageToBrush}}"
+                                    Style="{StaticResource ImProgressStyle}"
+                                    Value="{Binding UsagePercentage, Mode=OneWay}" />
+                                <TextBlock Style="{StaticResource ImBarTextStyle}" Text="{Binding UsagePercentage, StringFormat={}{0:0}%}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <DataTemplate x:Key="DriveRow" DataType="{x:Type vms:DriveUsage}">
+                <Border Style="{StaticResource ImRowStyle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource DriveNameWidth}" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Style="{StaticResource ImNameStyle}"
+                            Text="{Binding Name, Converter={StaticResource DeviceName}, ConverterParameter=drive}"
+                            ToolTip="{Binding Name}" />
+                        <Border Grid.Column="1" Style="{StaticResource ImBarCellStyle}">
+                            <Grid>
+                                <ProgressBar
+                                    Foreground="{Binding UsagePercentage, Converter={StaticResource UsageToBrush}}"
+                                    Style="{StaticResource ImProgressStyle}"
+                                    Value="{Binding UsagePercentage, Mode=OneWay}" />
+                                <TextBlock Style="{StaticResource ImBarTextStyle}">
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{x:Static p:Strings.Format_ImHexDrive}">
+                                            <Binding Path="UsagePercentage" />
+                                            <Binding Path="UsedSpace" />
+                                            <Binding Path="TotalSpace" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
+                                </TextBlock>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </Border>
+            </DataTemplate>
+
+            <!--  A temperature: name, a swatch of its level, the value, the lowest and highest since the card started; why there is none under it  -->
+            <DataTemplate x:Key="TemperatureRow" DataType="{x:Type vms:TemperatureTile}">
+                <Border Style="{StaticResource ImRowStyle}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="{StaticResource SwatchWidth}" />
+                                <ColumnDefinition Width="{StaticResource ValueWidth}" />
+                                <ColumnDefinition Width="{StaticResource RangeWidth}" />
+                                <ColumnDefinition Width="{StaticResource RangeWidth}" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock
+                                Style="{StaticResource ImNameStyle}"
+                                Text="{Binding Name, Converter={StaticResource DeviceName}}"
+                                ToolTip="{Binding Name}" />
+                            <Border Grid.Column="1" Style="{StaticResource ImCellStyle}">
+                                <Border Height="11" Background="{Binding Temperature, Converter={StaticResource HeatToBrush}}">
+                                    <Border.Style>
+                                        <Style TargetType="Border">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Temperature}" Value="{x:Null}">
+                                                    <Setter Property="BorderBrush" Value="{StaticResource ImBorderStrong}" />
+                                                    <Setter Property="BorderThickness" Value="1" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Border.Style>
+                                </Border>
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource ImCellStyle}">
+                                <TextBlock HorizontalAlignment="Right">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="{Binding Temperature, StringFormat={}{0:0} °C}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Temperature}" Value="{x:Null}">
+                                                    <Setter Property="Text" Value="{x:Static p:Strings.ImHex_NoValue}" />
+                                                    <Setter Property="Foreground" Value="{StaticResource ImDisabled}" />
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsAsleep}" Value="True">
+                                                    <Setter Property="Text" Value="{x:Static p:Strings.ImHex_Idle}" />
+                                                    <Setter Property="Foreground" Value="{StaticResource ImDisabled}" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                            <Border Grid.Column="3" Style="{StaticResource ImCellStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    Foreground="{StaticResource ImDisabled}"
+                                    Text="{Binding TemperatureMin, StringFormat={}{0:0}}" />
+                            </Border>
+                            <Border Grid.Column="4" Style="{StaticResource ImCellStyle}">
+                                <TextBlock
+                                    HorizontalAlignment="Right"
+                                    Foreground="{StaticResource ImDisabled}"
+                                    Text="{Binding TemperatureMax, StringFormat={}{0:0}}" />
+                            </Border>
+                        </Grid>
+                        <TextBlock
+                            Margin="5,1"
+                            Foreground="{StaticResource ImDisabled}"
+                            Text="{Binding Hint}"
+                            TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding Temperature}" Value="{x:Null}" />
+                                                <Condition Binding="{Binding IsAsleep}" Value="False" />
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </MultiDataTrigger>
+                                        <DataTrigger Binding="{Binding Hint}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!--
+        The whole card is only hidden while it is collapsed, so the window keeps its size; the collapsed one stands
+        in the corner of the buttons over it. Which one is shown, and the animation between them, is up to
+        CollapseAnimation in the code-behind.
+    -->
+    <Grid
+        TextElement.FontFamily="Cascadia Mono, Consolas"
+        TextElement.FontSize="13"
+        TextElement.Foreground="White"
+        TextOptions.TextFormattingMode="Display">
+    <Border
+        x:Name="FullCard"
+        Width="330"
+        Padding="12,10,12,0"
+        Background="{Binding CardBackground}"
+        Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <ContentControl
+                Content="{Binding}"
+                ContentTemplate="{StaticResource TabBar}"
+                Focusable="False" />
+
+            <!--  Disks  -->
+            <StackPanel Visibility="{Binding ShowDrives, Converter={StaticResource BooleanToVisibility}}">
+                <Border Style="{StaticResource ImHeaderStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ImArrowStyle}" />
+                        <TextBlock Text="{x:Static p:Strings.Term_Disks}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource ImTableStyle}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource DriveNameWidth}" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border BorderThickness="0,0,0,1" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock Text="{x:Static p:Strings.ImHex_Name}" TextTrimming="CharacterEllipsis" />
+                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock Text="{x:Static p:Strings.ImHex_Used}" />
+                            </Border>
+                        </Grid>
+                        <ItemsControl
+                            AlternationCount="2"
+                            ItemTemplate="{StaticResource DriveRow}"
+                            ItemsSource="{Binding Drives}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  System: the load table and the plot of the processor load  -->
+            <StackPanel Visibility="{Binding ShowSystem, Converter={StaticResource BooleanToVisibility}}">
+                <Border Style="{StaticResource ImHeaderStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ImArrowStyle}" />
+                        <TextBlock Text="{x:Static p:Strings.Term_System}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource ImTableStyle}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource LoadNameWidth}" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Border BorderThickness="0,0,0,1" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock Text="{x:Static p:Strings.ImHex_Name}" />
+                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock Text="{x:Static p:Strings.ImHex_Load}" />
+                            </Border>
+                        </Grid>
+                        <!--  The two rows here keep the stripes of the cards below in step  -->
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource LoadNameWidth}" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource ImNameStyle}" Text="{x:Static p:Strings.Term_Cpu}" />
+                            <Border Grid.Column="1" Style="{StaticResource ImBarCellStyle}">
+                                <Grid>
+                                    <ProgressBar
+                                        Foreground="{Binding CpuUsagePercentage, Converter={StaticResource UsageToBrush}}"
+                                        Style="{StaticResource ImProgressStyle}"
+                                        Value="{Binding CpuUsagePercentage, Mode=OneWay}" />
+                                    <TextBlock Style="{StaticResource ImBarTextStyle}" Text="{Binding CpuUsagePercentage, StringFormat={}{0:0}%}" />
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <Grid Background="{StaticResource ImRowAlt}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource LoadNameWidth}" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Style="{StaticResource ImNameStyle}" Text="{x:Static p:Strings.Term_Ram}" />
+                            <Border Grid.Column="1" Style="{StaticResource ImBarCellStyle}">
+                                <Grid>
+                                    <ProgressBar
+                                        Foreground="{Binding RamUsagePercentage, Converter={StaticResource UsageToBrush}}"
+                                        Style="{StaticResource ImProgressStyle}"
+                                        Value="{Binding RamUsagePercentage, Mode=OneWay}" />
+                                    <TextBlock Style="{StaticResource ImBarTextStyle}">
+                                        <TextBlock.Text>
+                                            <MultiBinding StringFormat="{x:Static p:Strings.Format_ImHexMemory}">
+                                                <Binding Path="RamUsagePercentage" />
+                                                <Binding Path="UsedRam" />
+                                                <Binding Path="TotalRam" />
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>
+                                </Grid>
+                            </Border>
+                        </Grid>
+                        <ItemsControl
+                            AlternationCount="2"
+                            ItemTemplate="{StaticResource GpuRow}"
+                            ItemsSource="{Binding GpuUsage}" />
+                    </StackPanel>
+                </Border>
+                <Grid Height="48" Margin="0,3,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border Grid.RowSpan="4" Background="{StaticResource ImFrame}" />
+                    <Border BorderBrush="#14FFFFFF" BorderThickness="0,0,0,1" />
+                    <Border
+                        Grid.Row="1"
+                        BorderBrush="#14FFFFFF"
+                        BorderThickness="0,0,0,1" />
+                    <Border
+                        Grid.Row="2"
+                        BorderBrush="#14FFFFFF"
+                        BorderThickness="0,0,0,1" />
+                    <Canvas
+                        x:Name="Plot"
+                        Grid.RowSpan="4"
+                        ClipToBounds="True">
+                        <Polyline
+                            x:Name="PlotLine"
+                            Stroke="#4F8FDB"
+                            StrokeLineJoin="Round"
+                            StrokeThickness="1.5" />
+                    </Canvas>
+                    <TextBlock
+                        Grid.RowSpan="4"
+                        Margin="4,0"
+                        Foreground="{StaticResource ImDisabled}"
+                        Text="{x:Static p:Strings.ImHex_CpuHistory}" />
+                    <TextBlock
+                        Grid.RowSpan="4"
+                        Margin="4,0"
+                        HorizontalAlignment="Right"
+                        Text="{Binding CpuUsagePercentage, StringFormat={}{0:0}%}" />
+                </Grid>
+            </StackPanel>
+
+            <!--  Temperature  -->
+            <StackPanel Visibility="{Binding ShowTemperatures, Converter={StaticResource BooleanToVisibility}}">
+                <Border Style="{StaticResource ImHeaderStyle}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource ImArrowStyle}" />
+                        <TextBlock Text="{x:Static p:Strings.Term_Temperature}" />
+                    </StackPanel>
+                </Border>
+                <Border Style="{StaticResource ImTableStyle}">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="{StaticResource SwatchWidth}" />
+                                <ColumnDefinition Width="{StaticResource ValueWidth}" />
+                                <ColumnDefinition Width="{StaticResource RangeWidth}" />
+                                <ColumnDefinition Width="{StaticResource RangeWidth}" />
+                            </Grid.ColumnDefinitions>
+                            <Border BorderThickness="0,0,0,1" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock Text="{x:Static p:Strings.ImHex_Name}" />
+                            </Border>
+                            <Border Grid.Column="1" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock Text="{x:Static p:Strings.ImHex_Color}" TextTrimming="CharacterEllipsis" />
+                            </Border>
+                            <Border Grid.Column="2" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock HorizontalAlignment="Right" Text="{x:Static p:Strings.ImHex_Value}" />
+                            </Border>
+                            <Border Grid.Column="3" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock HorizontalAlignment="Right" Text="{x:Static p:Strings.ImHex_Min}" />
+                            </Border>
+                            <Border Grid.Column="4" Style="{StaticResource ImHeadCellStyle}">
+                                <TextBlock HorizontalAlignment="Right" Text="{x:Static p:Strings.ImHex_Max}" />
+                            </Border>
+                        </Grid>
+                        <ItemsControl
+                            AlternationCount="2"
+                            ItemTemplate="{StaticResource TemperatureRow}"
+                            ItemsSource="{Binding Temperatures}" />
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!--  The status bar: the clock and the date, cut with an ellipsis when it is long  -->
+            <Border
+                Margin="-12,8,-12,0"
+                Padding="12,2,12,6"
+                Background="#0DFFFFFF"
+                BorderBrush="{StaticResource ImBorderLight}"
+                BorderThickness="0,1,0,0"
+                CornerRadius="0,0,19,19">
+                <DockPanel>
+                    <ContentControl Content="{Binding}" Style="{StaticResource BottomButtonsStyle}" />
+                    <TextBlock Margin="0,0,8,0" Text="{Binding CurrentTime, StringFormat='⏱ {0}'}" />
+                    <TextBlock
+                        Margin="0,0,8,0"
+                        Foreground="{StaticResource ImBorderStrong}"
+                        Text="│" />
+                    <TextBlock
+                        Text="{Binding CurrentDate}"
+                        TextTrimming="CharacterEllipsis"
+                        ToolTip="{x:Static sys:Environment.MachineName}" />
+                </DockPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+
+    <!--  Collapsed: the window tab and the values in one or two lines; in a bottom corner the buttons at their end  -->
+    <Border
+        x:Name="CollapsedCard"
+        Width="330"
+        Padding="12,10,12,8"
+        Background="{Binding CardBackground}"
+        Visibility="Hidden">
+        <Border.Style>
+            <Style BasedOn="{StaticResource CardStyle}" TargetType="Border">
+                <Setter Property="VerticalAlignment" Value="Top" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding ButtonsAtTop}" Value="False">
+                        <Setter Property="VerticalAlignment" Value="Bottom" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+        <StackPanel>
+            <ContentControl
+                Content="{Binding}"
+                ContentTemplate="{StaticResource TabBar}"
+                Focusable="False" />
+            <DockPanel>
+                <ContentControl Content="{Binding}" Style="{StaticResource BottomButtonsStyle}" />
+                <ItemsControl ItemTemplate="{StaticResource CollapsedValue}" ItemsSource="{Binding CollapsedValues}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
+            </DockPanel>
+        </StackPanel>
+    </Border>
+    </Grid>
+</UserControl>

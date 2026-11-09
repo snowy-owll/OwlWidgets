@@ -1,0 +1,49 @@
+<UserControl
+    x:Class="OwlWidgets.UI.Common.CornerPicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:p="clr-namespace:OwlWidgets.UI.Common.Properties"
+    x:Name="Root"
+    HorizontalAlignment="Left">
+    <!--
+        A card drawn as a rectangle with a radio button on each corner. The colours come from the foreground,
+        so the picker fits a light and a dark theme of the manager alike; the radio buttons take the style around them.
+    -->
+    <Grid Width="96" Height="68">
+        <Border
+            Margin="11"
+            BorderBrush="{Binding Foreground, ElementName=Root}"
+            BorderThickness="1.5"
+            CornerRadius="6"
+            Opacity="0.45" />
+        <Border
+            Margin="11"
+            Background="{Binding Foreground, ElementName=Root}"
+            CornerRadius="6"
+            Opacity="0.06" />
+        <RadioButton
+            x:Name="TopLeft"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Top"
+            Checked="OnChecked"
+            ToolTip="{x:Static p:Strings.Corner_TopLeft}" />
+        <RadioButton
+            x:Name="TopRight"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Top"
+            Checked="OnChecked"
+            ToolTip="{x:Static p:Strings.Corner_TopRight}" />
+        <RadioButton
+            x:Name="BottomLeft"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Checked="OnChecked"
+            ToolTip="{x:Static p:Strings.Corner_BottomLeft}" />
+        <RadioButton
+            x:Name="BottomRight"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Checked="OnChecked"
+            ToolTip="{x:Static p:Strings.Corner_BottomRight}" />
+    </Grid>
+</UserControl>

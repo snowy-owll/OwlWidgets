@@ -1,0 +1,31 @@
+Weather icons of the OwlWidgets Weather widget
+
+The PNG files in this folder are made from Noto Emoji images.
+
+  Copyright 2013 Google, Inc. All Rights Reserved.
+  Licensed under the Apache License, Version 2.0 (see LICENSE.txt in this folder).
+
+Source: https://github.com/googlefonts/noto-emoji
+Commit: e20cbc2bbec1926686be9f9bee7d1d2cfa1fea0e, folder 2D/svg (its LICENSE file names Apache 2.0)
+
+Changes: the SVG files were rendered to 100x100 PNG with transparent margins and renamed
+to the OpenWeatherMap icon codes the widget uses:
+
+  01d  emoji_u2600   sun
+  01n  emoji_u1f319  crescent moon
+  02d  emoji_u1f324  sun behind small cloud
+  02n  emoji_u2601   cloud
+  03d  emoji_u1f325  sun behind large cloud
+  03n  emoji_u2601   cloud
+  04d  emoji_u2601   cloud
+  04n  emoji_u2601   cloud
+  09d  emoji_u1f327  cloud with rain
+  09n  emoji_u1f327  cloud with rain
+  10d  emoji_u1f326  sun behind rain cloud
+  10n  emoji_u1f327  cloud with rain
+  11d  emoji_u26c8   cloud with lightning and rain
+  11n  emoji_u26c8   cloud with lightning and rain
+  13d  emoji_u1f328  cloud with snow
+  13n  emoji_u1f328  cloud with snow
+  50d  emoji_u1f32b  fog
+  50n  emoji_u1f32b  fog

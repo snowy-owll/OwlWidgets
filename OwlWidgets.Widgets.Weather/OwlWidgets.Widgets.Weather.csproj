@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Images\humidity.png" />
+    <None Remove="Assets\Images\WeatherIcons\*.png" />
+    <None Remove="Assets\Images\wind.png" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <WidgetFolder>Weather</WidgetFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Common\OwlWidgets.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+    <ProjectReference Include="..\OwlWidgets.UI.Common\OwlWidgets.UI.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Widgets.Weather.Descriptor\OwlWidgets.Widgets.Weather.Descriptor.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\WidgetPackage.targets" />
+
+  <ItemGroup>
+    <PropertyPageSchema Remove="Content.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Assets\Images\humidity.png" />
+    <Resource Include="Assets\Images\WeatherIcons\*.png" />
+    <Resource Include="Assets\Images\wind.png" />
+  </ItemGroup>
+
+  <!--
+    Weather icons: Noto Emoji (googlefonts/noto-emoji, 2D/svg), Apache 2.0, rendered to 100x100 PNG and named by
+    the OpenWeatherMap icon code. The license and the notice of the changes go with the widget, next to its Assets.
+  -->
+  <ItemGroup>
+    <None Update="Assets\Images\WeatherIcons\LICENSE.txt;Assets\Images\WeatherIcons\NOTICE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

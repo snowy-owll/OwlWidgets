@@ -1,0 +1,537 @@
+﻿<UserControl
+    x:Class="OwlWidgets.Widgets.Weather.Content"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OwlWidgets.Widgets.Weather"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:OwlWidgets.Widgets.Weather.Properties;assembly=OwlWidgets.Widgets.Weather.Descriptor"
+    xmlns:ui="clr-namespace:OwlWidgets.UI.Common;assembly=OwlWidgets.UI.Common"
+    xmlns:vms="clr-namespace:OwlWidgets.Widgets.Weather.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vms:ContentViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OwlWidgets.UI.Common;component/Themes/Card.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="DetailTextStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#9ca3af" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="8,0,0,0" />
+            </Style>
+
+            <Style x:Key="DetailValueStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="White" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Medium" />
+                <Setter Property="Margin" Value="8,4,0,0" />
+            </Style>
+
+            <!--  Colours of the detail icons, as in humidity.png and wind.png  -->
+            <SolidColorBrush x:Key="DetailIconBrush" Color="#2196F3" />
+            <SolidColorBrush x:Key="DetailAccentBrush" Color="#FF9800" />
+
+            <Style x:Key="ForecastTabStyle" TargetType="ListBoxItem">
+                <!--  8 tabs, today and 7 days, take the width of the 8 points below them  -->
+                <Setter Property="Width" Value="56" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Grid Background="Transparent">
+                                <Border
+                                    x:Name="Highlight"
+                                    Margin="2,0"
+                                    Background="#26FFFFFF"
+                                    CornerRadius="8"
+                                    Opacity="0" />
+                                <ContentPresenter Margin="0,6,0,8" />
+                                <Border
+                                    x:Name="Underline"
+                                    Height="3"
+                                    Margin="14,0"
+                                    VerticalAlignment="Bottom"
+                                    Background="White"
+                                    CornerRadius="1.5"
+                                    Opacity="0" />
+                            </Grid>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Highlight" Property="Opacity" Value="0.5" />
+                                </Trigger>
+                                <Trigger Property="IsSelected" Value="True">
+                                    <Setter TargetName="Highlight" Property="Opacity" Value="1" />
+                                    <Setter TargetName="Underline" Property="Opacity" Value="1" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <DataTemplate x:Key="ForecastTabTemplate" DataType="{x:Type vms:ForecastDayViewModel}">
+                <Grid Height="76">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="13"
+                        Text="{Binding Title}">
+                        <TextBlock.Style>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="Foreground" Value="White" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsWeekend}" Value="True">
+                                        <Setter Property="Foreground" Value="#f87171" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+                    <Image
+                        x:Name="Icon"
+                        Grid.Row="1"
+                        Width="44"
+                        Height="44"
+                        Margin="0,-6"
+                        Source="{Binding WeatherIcon}" />
+                    <TextBlock
+                        x:Name="Temperature"
+                        Grid.Row="2"
+                        HorizontalAlignment="Center"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        Text="{Binding Temperature, StringFormat={}{0}°}" />
+                    <TextBlock
+                        x:Name="Today"
+                        Grid.Row="1"
+                        Grid.RowSpan="2"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="13"
+                        Foreground="#9ca3af"
+                        Text="{x:Static p:Strings.Forecast_Today}"
+                        TextTrimming="CharacterEllipsis"
+                        Visibility="Collapsed" />
+                </Grid>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IsToday}" Value="True">
+                        <Setter TargetName="Icon" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="Temperature" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="Today" Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+
+            <DataTemplate x:Key="ForecastSlotTemplate" DataType="{x:Type vms:ForecastSlotViewModel}">
+                <StackPanel Width="56">
+                    <!--  The icons have wide margins of their own  -->
+                    <Image
+                        Width="48"
+                        Height="48"
+                        Margin="0,-8,0,-6"
+                        Source="{Binding WeatherIcon}" />
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        FontSize="15"
+                        FontWeight="Medium"
+                        Foreground="White"
+                        Text="{Binding Temperature, StringFormat={}{0}°}" />
+                    <TextBlock
+                        Margin="0,2,0,0"
+                        HorizontalAlignment="Center"
+                        FontSize="11"
+                        Foreground="#9ca3af"
+                        Text="{Binding Time}" />
+                </StackPanel>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Padding="25" Style="{StaticResource CardStyle}">
+        <Grid>
+            <!--
+                No place or no key: the hint and the way to the settings over the hidden layout of the card,
+                so the card has the size it will have with the weather. The hint takes no width of its own.
+            -->
+            <local:WidthlessDecorator>
+                <local:WidthlessDecorator.Style>
+                    <Style TargetType="local:WidthlessDecorator">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </local:WidthlessDecorator.Style>
+                <ui:SettingsPrompt
+                    VerticalAlignment="Center"
+                    Command="{Binding OpenSettingsCommand}"
+                    Message="{Binding EmptyMessage}" />
+            </local:WidthlessDecorator>
+
+            <Grid>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <!--  Hidden, not collapsed: it still sizes the card  -->
+                            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!--  Location, the time of the last update in the right corner  -->
+                <Grid
+                    Grid.Row="0"
+                    Grid.ColumnSpan="2"
+                    Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <!--  A long name is trimmed to the width of the rest of the card; the tooltip shows it whole  -->
+                    <local:WidthlessDecorator>
+                        <TextBlock
+                            FontSize="24"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="{Binding Location}"
+                            TextTrimming="CharacterEllipsis"
+                            ToolTip="{Binding Location}" />
+                    </local:WidthlessDecorator>
+                    <!--  Time of the last update and the source of the data  -->
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="20,-8,-8,0"
+                        VerticalAlignment="Top"
+                        Orientation="Horizontal">
+                        <TextBlock
+                            VerticalAlignment="Center"
+                            FontSize="11"
+                            Foreground="#9ca3af"
+                            Text="{Binding Status}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Status}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                        <!--  The request failed: try again now instead of in two minutes  -->
+                        <Button
+                            Margin="4,0,-2,0"
+                            VerticalAlignment="Center"
+                            Command="{Binding RefreshCommand}">
+                            <Button.Style>
+                                <Style BasedOn="{StaticResource CardRefreshButtonStyle}" TargetType="Button">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding Failed}" Value="True">
+                                            <Setter Property="Visibility" Value="Visible" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                        <Button
+                            Margin="6,0,0,0"
+                            VerticalAlignment="Center"
+                            Click="OnAttributionClick"
+                            Cursor="Hand"
+                            Focusable="False">
+                            <Button.ToolTip>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding AttributionText}" />
+                                    <TextBlock Margin="0,4,0,0" Text="{x:Static p:Strings.Attribution_OpenHint}" />
+                                </StackPanel>
+                            </Button.ToolTip>
+                            <Button.Style>
+                                <Style TargetType="Button">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Grid Width="15" Height="15">
+                                                    <Ellipse
+                                                        x:Name="Circle"
+                                                        Fill="Transparent"
+                                                        Stroke="#9ca3af"
+                                                        StrokeThickness="1.2" />
+                                                    <TextBlock
+                                                        x:Name="Letter"
+                                                        Margin="0,0,0,1"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        FontSize="10"
+                                                        FontWeight="Bold"
+                                                        Foreground="#9ca3af"
+                                                        Text="i" />
+                                                </Grid>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter TargetName="Circle" Property="Stroke" Value="White" />
+                                                        <Setter TargetName="Letter" Property="Foreground" Value="White" />
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <!--  The provider asks for no credit  -->
+                                        <DataTrigger Binding="{Binding AttributionText}" Value="{x:Null}">
+                                            <Setter Property="Visibility" Value="Collapsed" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <!--  Main Weather Display  -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Margin="0,0,20,0" VerticalAlignment="Center">
+                        <TextBlock
+                            FontSize="48"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="{Binding Temperature}" />
+                        <TextBlock
+                            Margin="0,-6,0,0"
+                            FontSize="11"
+                            Foreground="#9ca3af"
+                            Text="{Binding FeelsLike}" />
+                    </StackPanel>
+
+                    <Ellipse
+                        Grid.Column="1"
+                        Width="64"
+                        Height="64"
+                        Fill="#33B5B5B5" />
+                    <Image
+                        Grid.Column="1"
+                        Width="64"
+                        Height="64"
+                        Source="{Binding WeatherIcon}" />
+                </Grid>
+
+                <!--  Weather Details: humidity and wind, pressure and the sun to the right  -->
+                <Grid
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="20,0,0,0"
+                    VerticalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!--  Humidity  -->
+                    <StackPanel Orientation="Horizontal">
+                        <Image
+                            Width="24"
+                            Height="24"
+                            Source="Assets/Images/humidity.png" />
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource DetailTextStyle}" Text="{x:Static p:Strings.Humidity}" />
+                            <TextBlock Style="{StaticResource DetailValueStyle}" Text="{Binding Humidity}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--  Wind Speed, with an arrow where the wind blows to  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Margin="0,10,0,0"
+                        Orientation="Horizontal">
+                        <Image
+                            Width="24"
+                            Height="24"
+                            Source="Assets/Images/wind.png" />
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource DetailTextStyle}" Text="{x:Static p:Strings.WindSpeed}" />
+                            <StackPanel Orientation="Horizontal">
+                                <Path
+                                    Width="11"
+                                    Height="11"
+                                    Margin="8,4,-2,0"
+                                    VerticalAlignment="Center"
+                                    Data="M 5,0 L 10,10 L 5,7.5 L 0,10 Z"
+                                    Fill="White"
+                                    RenderTransformOrigin="0.5,0.5"
+                                    Stretch="Uniform">
+                                    <Path.RenderTransform>
+                                        <RotateTransform Angle="{Binding WindArrowAngle, TargetNullValue=0}" />
+                                    </Path.RenderTransform>
+                                    <Path.Style>
+                                        <Style TargetType="Path">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding WindArrowAngle}" Value="{x:Null}">
+                                                    <Setter Property="Visibility" Value="Collapsed" />
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Path.Style>
+                                </Path>
+                                <TextBlock Style="{StaticResource DetailValueStyle}" Text="{Binding WindSpeed}" />
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--  Pressure: a gauge  -->
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="20,0,0,0"
+                        Orientation="Horizontal">
+                        <Canvas
+                            Width="24"
+                            Height="24"
+                            VerticalAlignment="Center">
+                            <Path
+                                Data="M 4.5,18 A 9,9 0 1 1 19.5,18"
+                                Stroke="{StaticResource DetailIconBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="3" />
+                            <Path
+                                Data="M 12,13 L 16.5,7.5"
+                                Stroke="{StaticResource DetailAccentBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2.5" />
+                            <Ellipse
+                                Canvas.Left="9.5"
+                                Canvas.Top="10.5"
+                                Width="5"
+                                Height="5"
+                                Fill="{StaticResource DetailAccentBrush}" />
+                        </Canvas>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource DetailTextStyle}" Text="{x:Static p:Strings.Pressure}" />
+                            <TextBlock Style="{StaticResource DetailValueStyle}" Text="{Binding Pressure}" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!--  Sunrise and sunset: the sun over the horizon  -->
+                    <StackPanel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="20,10,0,0"
+                        Orientation="Horizontal">
+                        <Canvas
+                            Width="24"
+                            Height="24"
+                            VerticalAlignment="Center">
+                            <Path Data="M 6.5,18 A 5.5,5.5 0 0 1 17.5,18 Z" Fill="{StaticResource DetailAccentBrush}" />
+                            <Path
+                                Data="M 12,5 V 8.5 M 4.6,10.6 L 6.6,12.6 M 19.4,10.6 L 17.4,12.6"
+                                Stroke="{StaticResource DetailAccentBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2" />
+                            <Path
+                                Data="M 2,21 H 22"
+                                Stroke="{StaticResource DetailIconBrush}"
+                                StrokeEndLineCap="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2.5" />
+                        </Canvas>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource DetailTextStyle}" Text="{x:Static p:Strings.SunriseSunset}" />
+                            <TextBlock Style="{StaticResource DetailValueStyle}" Text="{Binding Sun}" />
+                        </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                <!--  Forecast: tabs of the days and 3 hour points of the selected day  -->
+                <StackPanel
+                    Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Margin="0,20,0,0">
+                    <!--  On in the settings: the room is there before the forecast is loaded  -->
+                    <StackPanel.Style>
+                        <Style TargetType="StackPanel">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ShowForecastPanel}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Style>
+                    <!--  The height of a row of tabs: 76 of the tab, 6 and 8 around it, 1 and 1 of the list  -->
+                    <ListBox
+                        MinHeight="92"
+                        HorizontalAlignment="Left"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        ItemContainerStyle="{StaticResource ForecastTabStyle}"
+                        ItemTemplate="{StaticResource ForecastTabTemplate}"
+                        ItemsSource="{Binding ForecastDays}"
+                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                        ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                        SelectedItem="{Binding SelectedForecastDay}">
+                        <ListBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ListBox.ItemsPanel>
+                    </ListBox>
+                    <Rectangle
+                        Height="1"
+                        Margin="0,0,0,12"
+                        Fill="#3d3d3d" />
+                    <!--  Room for the 8 points of a whole day, so the card keeps its size between the tabs  -->
+                    <Grid Width="448" Height="80">
+                        <!--  Not loaded yet, or the first request failed  -->
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="13"
+                            Foreground="#9ca3af"
+                            Text="{Binding ForecastStatus}" />
+                        <!--  Today keeps its points at the right, under the same hours of the other days  -->
+                        <ItemsControl
+                            HorizontalAlignment="Right"
+                            ItemTemplate="{StaticResource ForecastSlotTemplate}"
+                            ItemsSource="{Binding SelectedForecastDay.Slots}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

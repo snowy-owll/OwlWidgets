@@ -1,0 +1,49 @@
+<!-- The look of a log level, shared by the log screen and the record dialog. The item has Level and LevelText;
+     the user control around it sets views:LogTheme.IsDark, inherited by the item, which picks the shade of the level colour. -->
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+                    xmlns:converters="clr-namespace:OwlWidgets.Converters"
+                    xmlns:views="clr-namespace:OwlWidgets.Views">
+    <converters:LogLevelBrushConverter x:Key="LogLevelBrushConverter" />
+
+    <DataTemplate x:Key="LogLevelBadge">
+        <StackPanel Orientation="Horizontal">
+            <materialDesign:PackIcon x:Name="Icon" Kind="InformationOutline" Width="16" Height="16"
+                                     VerticalAlignment="Center" Margin="0,0,6,0">
+                <materialDesign:PackIcon.Foreground>
+                    <MultiBinding Converter="{StaticResource LogLevelBrushConverter}">
+                        <Binding Path="Level" />
+                        <Binding Path="(views:LogTheme.IsDark)" RelativeSource="{RelativeSource Self}" />
+                    </MultiBinding>
+                </materialDesign:PackIcon.Foreground>
+            </materialDesign:PackIcon>
+            <TextBlock x:Name="Text" Text="{Binding LevelText}" FontFamily="Consolas" VerticalAlignment="Center">
+                <TextBlock.Foreground>
+                    <MultiBinding Converter="{StaticResource LogLevelBrushConverter}">
+                        <Binding Path="Level" />
+                        <Binding Path="(views:LogTheme.IsDark)" RelativeSource="{RelativeSource Self}" />
+                    </MultiBinding>
+                </TextBlock.Foreground>
+            </TextBlock>
+        </StackPanel>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Level}" Value="Trace">
+                <Setter TargetName="Icon" Property="Kind" Value="BugOutline" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Level}" Value="Debug">
+                <Setter TargetName="Icon" Property="Kind" Value="BugOutline" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Level}" Value="Warning">
+                <Setter TargetName="Icon" Property="Kind" Value="AlertOutline" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Level}" Value="Error">
+                <Setter TargetName="Icon" Property="Kind" Value="AlertCircleOutline" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Level}" Value="Critical">
+                <Setter TargetName="Icon" Property="Kind" Value="AlertOctagonOutline" />
+                <Setter TargetName="Text" Property="FontWeight" Value="Bold" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>
+</ResourceDictionary>

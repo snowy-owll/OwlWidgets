@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Текущая погода и прогноз по дням для выбранного места по данным OpenWeatherMap или Open-Meteo.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Погода</value>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Влажность</value>
+  </data>
+  <data name="WindSpeed" xml:space="preserve">
+    <value>Ветер</value>
+  </data>
+  <data name="Format_WindSpeed" xml:space="preserve">
+    <value>{0} м/с</value>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>Загрузка…</value>
+  </data>
+  <data name="Status_Updated" xml:space="preserve">
+    <value>Обновлено {0}</value>
+  </data>
+  <data name="Status_Failed" xml:space="preserve">
+    <value>Не удалось обновить</value>
+  </data>
+  <data name="Status_FailedUpdated" xml:space="preserve">
+    <value>Не удалось обновить, данные от {0}</value>
+  </data>
+  <data name="Settings_Location" xml:space="preserve">
+    <value>Место</value>
+  </data>
+  <data name="Settings_ApiKey" xml:space="preserve">
+    <value>Ключ OpenWeatherMap</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Язык названия места (пусто — язык приложения)</value>
+  </data>
+  <data name="Settings_Interval" xml:space="preserve">
+    <value>Интервал, мс</value>
+  </data>
+  <data name="Error_Interval" xml:space="preserve">
+    <value>Интервал должен быть положительным числом.</value>
+  </data>
+  <data name="Settings_ShowForecast" xml:space="preserve">
+    <value>Показывать прогноз по дням</value>
+  </data>
+  <data name="Forecast_Today" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="Forecast_Loading" xml:space="preserve">
+    <value>Загрузка прогноза…</value>
+  </data>
+  <data name="Forecast_Failed" xml:space="preserve">
+    <value>Не удалось загрузить прогноз</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>Давление</value>
+  </data>
+  <data name="Format_PressureHpa" xml:space="preserve">
+    <value>{0} гПа</value>
+  </data>
+  <data name="Format_PressureMmHg" xml:space="preserve">
+    <value>{0} мм рт. ст.</value>
+  </data>
+  <data name="SunriseSunset" xml:space="preserve">
+    <value>Восход / закат</value>
+  </data>
+  <data name="Format_FeelsLike" xml:space="preserve">
+    <value>Ощущается как {0}°</value>
+  </data>
+  <data name="Settings_Provider" xml:space="preserve">
+    <value>Источник данных о погоде</value>
+  </data>
+  <data name="Provider_OpenWeatherMap" xml:space="preserve">
+    <value>OpenWeatherMap (нужен ключ)</value>
+  </data>
+  <data name="Provider_OpenMeteo" xml:space="preserve">
+    <value>Open-Meteo (без ключа)</value>
+  </data>
+  <data name="Attribution_OpenWeatherMap" xml:space="preserve">
+    <value>Данные о погоде: OpenWeather, openweathermap.org (CC BY-SA 4.0)</value>
+  </data>
+  <data name="Attribution_OpenMeteo" xml:space="preserve">
+    <value>Данные о погоде: Open-Meteo.com (CC BY 4.0)</value>
+  </data>
+  <data name="Attribution_OpenHint" xml:space="preserve">
+    <value>Щёлкните, чтобы открыть сайт.</value>
+  </data>
+  <data name="Settings_PlaceSearch" xml:space="preserve">
+    <value>Найти место по названию</value>
+  </data>
+  <data name="Place_None" xml:space="preserve">
+    <value>Не выбрано</value>
+  </data>
+  <data name="Empty_NoPlace" xml:space="preserve">
+    <value>Место не выбрано. Найдите его в настройках.</value>
+  </data>
+  <data name="Empty_NoKey" xml:space="preserve">
+    <value>Для OpenWeatherMap нужен ключ. Введите его в настройках.</value>
+  </data>
+  <data name="Search_Searching" xml:space="preserve">
+    <value>Поиск…</value>
+  </data>
+  <data name="Search_NothingFound" xml:space="preserve">
+    <value>Ничего не найдено.</value>
+  </data>
+  <data name="Search_NeedsKey" xml:space="preserve">
+    <value>Введите ключ OpenWeatherMap, чтобы искать.</value>
+  </data>
+  <data name="Search_KeyRejected" xml:space="preserve">
+    <value>OpenWeatherMap не принял ключ.</value>
+  </data>
+  <data name="Search_Failed" xml:space="preserve">
+    <value>Поиск не удался. Проверьте соединение.</value>
+  </data>
+  <data name="Settings_Icons" xml:space="preserve">
+    <value>Значки погоды</value>
+  </data>
+  <data name="Icons_BuiltIn" xml:space="preserve">
+    <value>Встроенные (Noto Emoji)</value>
+  </data>
+  <data name="Icons_Pack" xml:space="preserve">
+    <value>{0} · значков: {1} из {2}</value>
+  </data>
+  <data name="Icons_ImportZip" xml:space="preserve">
+    <value>Из архива zip…</value>
+  </data>
+  <data name="Icons_ImportFolder" xml:space="preserve">
+    <value>Из папки…</value>
+  </data>
+  <data name="Icons_UseBuiltIn" xml:space="preserve">
+    <value>Встроенные</value>
+  </data>
+  <data name="Icons_Hint" xml:space="preserve">
+    <value>Файлы PNG, названные кодом значка, например 10d.png или 10d@2x.png, как на openweathermap.org. Значки копируются; недостающие берутся из встроенных.</value>
+  </data>
+  <data name="Icons_Importing" xml:space="preserve">
+    <value>Импорт…</value>
+  </data>
+  <data name="Icons_Imported" xml:space="preserve">
+    <value>Импортировано значков: {0} из {1}.</value>
+  </data>
+  <data name="Icons_Missing" xml:space="preserve">
+    <value>Не найдены: {0}. Для них взяты встроенные.</value>
+  </data>
+  <data name="Icons_Rejected" xml:space="preserve">
+    <value>Пропущены — не картинка или слишком большой файл: {0}.</value>
+  </data>
+  <data name="Icons_NoneFound" xml:space="preserve">
+    <value>Значки не найдены. Нужны файлы PNG вроде 01d.png или 01d@2x.png.</value>
+  </data>
+  <data name="Icons_Failed" xml:space="preserve">
+    <value>Значки не импортированы.</value>
+  </data>
+  <data name="Icons_BadArchive" xml:space="preserve">
+    <value>Файл не архив zip или повреждён.</value>
+  </data>
+  <data name="Icons_SourceMissing" xml:space="preserve">
+    <value>Файл или папка не найдены.</value>
+  </data>
+  <data name="Icons_NoAccess" xml:space="preserve">
+    <value>Нет доступа к файлу или папке.</value>
+  </data>
+  <data name="Icons_ReadWriteFailed" xml:space="preserve">
+    <value>Не удалось прочитать или сохранить значки. Возможно, файл занят другой программой или диск заполнен.</value>
+  </data>
+  <data name="Icons_ZipFilter" xml:space="preserve">
+    <value>Архивы zip (*.zip)|*.zip</value>
+  </data>
+</root>

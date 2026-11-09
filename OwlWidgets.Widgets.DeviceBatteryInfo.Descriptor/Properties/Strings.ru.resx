@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Уровень заряда выбранных спаренных Bluetooth-устройств.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Заряд устройств</value>
+  </data>
+  <data name="Settings_Interval" xml:space="preserve">
+    <value>Интервал, мс</value>
+  </data>
+  <data name="Settings_Devices" xml:space="preserve">
+    <value>Устройства</value>
+  </data>
+  <data name="Settings_Add" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="Settings_Remove" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Settings_Icon" xml:space="preserve">
+    <value>Значок на карточке</value>
+  </data>
+  <data name="Settings_ChooseIcon" xml:space="preserve">
+    <value>Свой значок из файла с картинкой…</value>
+  </data>
+  <data name="Settings_UserIcons" xml:space="preserve">
+    <value>Ваши значки</value>
+  </data>
+  <data name="Settings_RemoveUserIcon" xml:space="preserve">
+    <value>Удалить значок. Устройства с ним получат знак Bluetooth.</value>
+  </data>
+  <data name="Settings_IconFilter" xml:space="preserve">
+    <value>Картинки|*.png;*.jpg;*.jpeg;*.bmp;*.gif;*.ico;*.tif;*.tiff|Все файлы|*.*</value>
+  </data>
+  <data name="Settings_IconTooLarge" xml:space="preserve">
+    <value>Файл больше 10 МБ.</value>
+  </data>
+  <data name="Settings_IconNotImage" xml:space="preserve">
+    <value>Файл не картинка или повреждён.</value>
+  </data>
+  <data name="Settings_IconMissing" xml:space="preserve">
+    <value>Файл не найден.</value>
+  </data>
+  <data name="Settings_IconNoAccess" xml:space="preserve">
+    <value>Нет доступа к файлу или к папке виджета.</value>
+  </data>
+  <data name="Settings_IconFailed" xml:space="preserve">
+    <value>Не удалось скопировать картинку.</value>
+  </data>
+  <data name="Icon_None" xml:space="preserve">
+    <value>Знак Bluetooth</value>
+  </data>
+  <data name="Icon_headphones" xml:space="preserve">
+    <value>Наушники</value>
+  </data>
+  <data name="Icon_gamepad" xml:space="preserve">
+    <value>Геймпад</value>
+  </data>
+  <data name="Icon_joystick" xml:space="preserve">
+    <value>Джойстик</value>
+  </data>
+  <data name="Icon_mouse" xml:space="preserve">
+    <value>Мышь</value>
+  </data>
+  <data name="Icon_keyboard" xml:space="preserve">
+    <value>Клавиатура</value>
+  </data>
+  <data name="Icon_phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Icon_watch" xml:space="preserve">
+    <value>Часы</value>
+  </data>
+  <data name="Icon_laptop" xml:space="preserve">
+    <value>Ноутбук</value>
+  </data>
+  <data name="Icon_speaker" xml:space="preserve">
+    <value>Колонка</value>
+  </data>
+  <data name="Icon_microphone" xml:space="preserve">
+    <value>Микрофон</value>
+  </data>
+  <data name="Icon_studio_microphone" xml:space="preserve">
+    <value>Студийный микрофон</value>
+  </data>
+  <data name="Icon_pen" xml:space="preserve">
+    <value>Перо</value>
+  </data>
+  <data name="Icon_hearing_aid" xml:space="preserve">
+    <value>Слуховой аппарат</value>
+  </data>
+  <data name="Icon_camera" xml:space="preserve">
+    <value>Камера</value>
+  </data>
+  <data name="Icon_radio" xml:space="preserve">
+    <value>Радио</value>
+  </data>
+  <data name="Icon_battery" xml:space="preserve">
+    <value>Батарея</value>
+  </data>
+  <data name="Settings_Searching" xml:space="preserve">
+    <value>Поиск устройств с уровнем заряда…</value>
+  </data>
+  <data name="Settings_NoDevices" xml:space="preserve">
+    <value>Ни одно Bluetooth-устройство не сообщает уровень заряда. Сначала спарьте и подключите устройство в настройках Bluetooth Windows.</value>
+  </data>
+  <data name="Settings_AllAdded" xml:space="preserve">
+    <value>Все устройства, которые сообщают уровень заряда, добавлены.</value>
+  </data>
+  <data name="Settings_DevicesHint" xml:space="preserve">
+    <value>В списке только спаренные Bluetooth-устройства, которые сообщают уровень заряда.</value>
+  </data>
+  <data name="Settings_SearchFailed" xml:space="preserve">
+    <value>Не удалось получить список устройств: {0}</value>
+  </data>
+  <data name="Settings_NotFound" xml:space="preserve">
+    <value>сейчас не найдено</value>
+  </data>
+  <data name="Error_Interval" xml:space="preserve">
+    <value>Интервал должен быть положительным числом.</value>
+  </data>
+  <data name="State_Disconnected" xml:space="preserve">
+    <value>Отключено</value>
+  </data>
+  <data name="State_NotFound" xml:space="preserve">
+    <value>Не найдено</value>
+  </data>
+  <data name="Empty_Message" xml:space="preserve">
+    <value>Устройства не добавлены. Добавьте Bluetooth-устройства в настройках.</value>
+  </data>
+</root>

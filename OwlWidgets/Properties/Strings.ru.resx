@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Nav_Widgets" xml:space="preserve">
+    <value>Виджеты</value>
+  </data>
+  <data name="Nav_Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Nav_Log" xml:space="preserve">
+    <value>Журнал</value>
+  </data>
+  <data name="Nav_About" xml:space="preserve">
+    <value>О программе</value>
+  </data>
+  <data name="Log_Picker" xml:space="preserve">
+    <value>Журнал</value>
+  </data>
+  <data name="Log_All" xml:space="preserve">
+    <value>Все журналы</value>
+  </data>
+  <data name="Log_Manager" xml:space="preserve">
+    <value>Менеджер</value>
+  </data>
+  <data name="Log_Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="Log_Errors" xml:space="preserve">
+    <value>Ошибки</value>
+  </data>
+  <data name="Log_Warnings" xml:space="preserve">
+    <value>Предупреждения</value>
+  </data>
+  <data name="Log_Information" xml:space="preserve">
+    <value>Сведения</value>
+  </data>
+  <data name="Log_Debug" xml:space="preserve">
+    <value>Отладка</value>
+  </data>
+  <data name="Log_Clear" xml:space="preserve">
+    <value>Очистить экран (файлы журнала остаются)</value>
+  </data>
+  <data name="Log_OpenFolder" xml:space="preserve">
+    <value>Открыть папку журнала</value>
+  </data>
+  <data name="Log_SessionOnly" xml:space="preserve">
+    <value>Только записи текущего сеанса, последние в каждом журнале. Полная история — в файлах журнала.</value>
+  </data>
+  <data name="Log_Empty" xml:space="preserve">
+    <value>Записей нет</value>
+  </data>
+  <data name="Log_ColumnLevel" xml:space="preserve">
+    <value>Уровень</value>
+  </data>
+  <data name="Log_ColumnTime" xml:space="preserve">
+    <value>Время</value>
+  </data>
+  <data name="Log_ColumnOrigin" xml:space="preserve">
+    <value>Экземпляр</value>
+  </data>
+  <data name="Log_ColumnSource" xml:space="preserve">
+    <value>Источник</value>
+  </data>
+  <data name="Log_ColumnMessage" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="LogEntry_Title" xml:space="preserve">
+    <value>Запись журнала</value>
+  </data>
+  <data name="LogEntry_Category" xml:space="preserve">
+    <value>Категория</value>
+  </data>
+  <data name="LogEntry_Exception" xml:space="preserve">
+    <value>Исключение</value>
+  </data>
+  <data name="LogEntry_Copy" xml:space="preserve">
+    <value>Копировать</value>
+  </data>
+  <data name="LogEntry_CopyToolTip" xml:space="preserve">
+    <value>Скопировать запись строкой файла журнала</value>
+  </data>
+  <data name="LogEntry_Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Tray_Open" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="Tray_Exit" xml:space="preserve">
+    <value>Выход</value>
+  </data>
+  <data name="MoveAll_Start" xml:space="preserve">
+    <value>Переместить виджеты</value>
+  </data>
+  <data name="MoveAll_Cancel" xml:space="preserve">
+    <value>Отменить перемещение</value>
+  </data>
+  <data name="MoveAll_Nothing" xml:space="preserve">
+    <value>Нет запущенных виджетов</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Оформление</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="Theme_Light" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="Theme_Dark" xml:space="preserve">
+    <value>Тёмная</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="Settings_ThemeSystem" xml:space="preserve">
+    <value>Как в Windows</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Settings_InterfaceLanguage" xml:space="preserve">
+    <value>Язык интерфейса</value>
+  </data>
+  <data name="Settings_LanguageSystem" xml:space="preserve">
+    <value>Как в Windows</value>
+  </data>
+  <data name="Settings_RestartRequired" xml:space="preserve">
+    <value>Язык изменится после перезапуска приложения.</value>
+  </data>
+  <data name="Settings_Startup" xml:space="preserve">
+    <value>Запуск</value>
+  </data>
+  <data name="Settings_StartWithWindows" xml:space="preserve">
+    <value>Запускать вместе с Windows</value>
+  </data>
+  <data name="Settings_ShowWindowOnStart" xml:space="preserve">
+    <value>Открывать это окно при запуске приложения</value>
+  </data>
+  <data name="Settings_Restart" xml:space="preserve">
+    <value>Перезапустить</value>
+  </data>
+  <data name="About_Version" xml:space="preserve">
+    <value>Версия</value>
+  </data>
+  <data name="About_Build" xml:space="preserve">
+    <value>Сборка</value>
+  </data>
+  <data name="About_ReleasedOn" xml:space="preserve">
+    <value>от</value>
+  </data>
+  <data name="About_Author" xml:space="preserve">
+    <value>Автор:</value>
+  </data>
+  <data name="About_Project" xml:space="preserve">
+    <value>Страница проекта:</value>
+  </data>
+  <data name="About_OpenInBrowser" xml:space="preserve">
+    <value>Открыть в браузере</value>
+  </data>
+  <data name="About_System" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="About_Runtime" xml:space="preserve">
+    <value>Среда выполнения</value>
+  </data>
+  <data name="About_OperatingSystem" xml:space="preserve">
+    <value>Операционная система</value>
+  </data>
+  <data name="About_Folders" xml:space="preserve">
+    <value>Папки</value>
+  </data>
+  <data name="About_Data" xml:space="preserve">
+    <value>Данные</value>
+  </data>
+  <data name="About_OpenData" xml:space="preserve">
+    <value>Открыть папку данных</value>
+  </data>
+  <data name="About_Logs" xml:space="preserve">
+    <value>Журналы</value>
+  </data>
+  <data name="About_OpenLogs" xml:space="preserve">
+    <value>Открыть папку журналов</value>
+  </data>
+  <data name="About_InstalledWidgets" xml:space="preserve">
+    <value>Установленные виджеты</value>
+  </data>
+  <data name="About_NoWidgets" xml:space="preserve">
+    <value>Виджетов не найдено</value>
+  </data>
+  <data name="About_ThirdParty" xml:space="preserve">
+    <value>Сторонние компоненты</value>
+  </data>
+  <data name="Widgets_Instances" xml:space="preserve">
+    <value>Экземпляры</value>
+  </data>
+  <data name="Widgets_InstanceId" xml:space="preserve">
+    <value>ID экземпляра</value>
+  </data>
+  <data name="Widgets_TypeId" xml:space="preserve">
+    <value>ID типа</value>
+  </data>
+  <data name="Widgets_Add" xml:space="preserve">
+    <value>Добавить виджет</value>
+  </data>
+  <data name="Widgets_AddNothing" xml:space="preserve">
+    <value>Все доступные виджеты уже добавлены</value>
+  </data>
+  <data name="AddWidget_Title" xml:space="preserve">
+    <value>Добавление виджета</value>
+  </data>
+  <data name="AddWidget_ChooseStep" xml:space="preserve">
+    <value>Выберите виджет</value>
+  </data>
+  <data name="AddWidget_SettingsStep" xml:space="preserve">
+    <value>Настройки: {0}</value>
+  </data>
+  <data name="AddWidget_Id" xml:space="preserve">
+    <value>ID: {0}</value>
+  </data>
+  <data name="AddWidget_Next" xml:space="preserve">
+    <value>Далее</value>
+  </data>
+  <data name="AddWidget_Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="AddWidget_Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="AddWidget_Create" xml:space="preserve">
+    <value>Создать</value>
+  </data>
+  <data name="Widgets_Start" xml:space="preserve">
+    <value>Запустить</value>
+  </data>
+  <data name="Widgets_Stop" xml:space="preserve">
+    <value>Остановить</value>
+  </data>
+  <data name="Widgets_Move" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="Widgets_Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="Widgets_StartWithManager" xml:space="preserve">
+    <value>Запускать вместе с менеджером</value>
+  </data>
+  <data name="Widgets_RestartOnCrash" xml:space="preserve">
+    <value>Перезапускать после падения</value>
+  </data>
+  <data name="Widgets_InheritTheme" xml:space="preserve">
+    <value>Оформление приложения (Material Design)</value>
+  </data>
+  <data name="Widgets_InheritThemeHint" xml:space="preserve">
+    <value>Виджет получает стили Material Design и светлую или тёмную тему</value>
+  </data>
+  <data name="Widgets_InheritThemeRequired" xml:space="preserve">
+    <value>Виджет не работает без оформления приложения</value>
+  </data>
+  <data name="Widgets_ThemeApplication" xml:space="preserve">
+    <value>Как в приложении</value>
+  </data>
+  <data name="Widgets_Position" xml:space="preserve">
+    <value>Положение</value>
+  </data>
+  <data name="Widgets_AnchorHint" xml:space="preserve">
+    <value>Положение задаётся для выбранного угла карточки. Он остаётся на месте, когда карточка растёт или сжимается.</value>
+  </data>
+  <data name="Widgets_Topmost" xml:space="preserve">
+    <value>Поверх всех окон</value>
+  </data>
+  <data name="Widgets_TopmostHint" xml:space="preserve">
+    <value>Карточка остаётся над другими программами и играми в окне без рамки. Виджет может переключать это своей кнопкой.</value>
+  </data>
+  <data name="Widgets_SaveSettings" xml:space="preserve">
+    <value>Сохранить настройки</value>
+  </data>
+  <data name="Widgets_RevertSettings" xml:space="preserve">
+    <value>Отменить изменения</value>
+  </data>
+  <data name="Widgets_RevertSettingsHint" xml:space="preserve">
+    <value>Вернуть настройки, сохранённые последними</value>
+  </data>
+  <data name="Widgets_ApplyPosition" xml:space="preserve">
+    <value>Применить положение</value>
+  </data>
+  <data name="Widgets_RevertPosition" xml:space="preserve">
+    <value>Вернуть сохранённое положение</value>
+  </data>
+  <data name="Widgets_PageGeneral" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="Widgets_PageWidget" xml:space="preserve">
+    <value>Виджет</value>
+  </data>
+  <data name="Widgets_PageJson" xml:space="preserve">
+    <value>JSON</value>
+  </data>
+  <data name="Widgets_JsonDefaults" xml:space="preserve">
+    <value>Файла настроек пока нет: виджет использует значения по умолчанию.</value>
+  </data>
+  <data name="State_Running" xml:space="preserve">
+    <value>Запущен</value>
+  </data>
+  <data name="State_Starting" xml:space="preserve">
+    <value>Запускается</value>
+  </data>
+  <data name="State_Stopping" xml:space="preserve">
+    <value>Останавливается</value>
+  </data>
+  <data name="State_RestartBackoff" xml:space="preserve">
+    <value>Пауза перед перезапуском</value>
+  </data>
+  <data name="State_Faulted" xml:space="preserve">
+    <value>Упал и больше не будет перезапускаться</value>
+  </data>
+  <data name="State_Stopped" xml:space="preserve">
+    <value>Остановлен</value>
+  </data>
+  <data name="Crash_WillRestart" xml:space="preserve">
+    <value>Виджет упал и будет запущен снова.</value>
+  </data>
+  <data name="Crash_NoRestart" xml:space="preserve">
+    <value>Виджет упал и больше не будет перезапускаться.</value>
+  </data>
+  <data name="Crash_Again" xml:space="preserve">
+    <value>Виджет снова упал и больше не будет перезапускаться.</value>
+  </data>
+  <data name="Instance_TagHint" xml:space="preserve">
+    <value>Название (необязательно)</value>
+  </data>
+  <data name="Instance_TagHelper" xml:space="preserve">
+    <value>Показывается вместо названия типа виджета</value>
+  </data>
+  <data name="Widgets_EditTag" xml:space="preserve">
+    <value>Переименовать</value>
+  </data>
+  <data name="TagDialog_Title" xml:space="preserve">
+    <value>Название экземпляра</value>
+  </data>
+  <data name="TagDialog_Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="DeleteDialog_Title" xml:space="preserve">
+    <value>Удалить виджет?</value>
+  </data>
+  <data name="DeleteDialog_Message" xml:space="preserve">
+    <value>Виджет будет остановлен и удалён вместе с настройками и журналом. Это нельзя отменить.</value>
+  </data>
+  <data name="Settings_Updates" xml:space="preserve">
+    <value>Обновления</value>
+  </data>
+  <data name="Settings_CheckForUpdates" xml:space="preserve">
+    <value>Проверять новые версии на GitHub</value>
+  </data>
+  <data name="About_Updates" xml:space="preserve">
+    <value>Обновления</value>
+  </data>
+  <data name="About_CheckUpdates" xml:space="preserve">
+    <value>Проверить</value>
+  </data>
+  <data name="About_UpdateNotChecked" xml:space="preserve">
+    <value>Ещё не проверялись</value>
+  </data>
+  <data name="About_UpdateChecking" xml:space="preserve">
+    <value>Проверка обновлений…</value>
+  </data>
+  <data name="About_UpdateLatest" xml:space="preserve">
+    <value>Установлена последняя версия</value>
+  </data>
+  <data name="About_UpdateAvailable" xml:space="preserve">
+    <value>Доступна версия {0}</value>
+  </data>
+  <data name="About_UpdateFailed" xml:space="preserve">
+    <value>Не удалось проверить обновления, подробности в журнале</value>
+  </data>
+  <data name="About_OpenRelease" xml:space="preserve">
+    <value>Страница выпуска</value>
+  </data>
+  <data name="About_UpdateCheckedAt" xml:space="preserve">
+    <value>Последняя проверка: {0}</value>
+  </data>
+  <data name="Update_Notification" xml:space="preserve">
+    <value>Доступна версия {0}. Нажмите, чтобы открыть страницу выпуска.</value>
+  </data>
+</root>

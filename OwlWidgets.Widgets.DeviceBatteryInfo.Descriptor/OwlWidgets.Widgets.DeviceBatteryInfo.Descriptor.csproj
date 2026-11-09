@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>OwlWidgets.Widgets.DeviceBatteryInfo</RootNamespace>
+    <WidgetFolder>DeviceBatteryInfo</WidgetFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Common\OwlWidgets.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+  </ItemGroup>
+
+  <!-- Strings of the whole widget: the settings screen here and the runtime view, which references this assembly. -->
+  <ItemGroup>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- Icon of the widget type in the manager: Tango Desktop Project, public domain. -->
+  <ItemGroup>
+    <Resource Include="Assets\Icon.png" />
+  </ItemGroup>
+
+  <!--
+    Device icons: Noto Emoji (googlefonts/noto-emoji, 2D/svg), Apache 2.0, rendered to 100x100 PNG. In this assembly,
+    so the settings screen in the manager and the card in the wrapper read them alike. The license and the notice
+    of the changes go with the widget.
+  -->
+  <ItemGroup>
+    <None Remove="Assets\DeviceIcons\*.png" />
+    <Resource Include="Assets\DeviceIcons\*.png" />
+    <None Update="Assets\DeviceIcons\LICENSE.txt;Assets\DeviceIcons\NOTICE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <Import Project="..\WidgetPackage.targets" />
+
+</Project>

@@ -1,0 +1,72 @@
+<Window x:Class="OwlWidgets.MainWindow" x:ClassModifier="internal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:p="clr-namespace:OwlWidgets.Properties"
+        xmlns:views="clr-namespace:OwlWidgets.Views"
+        xmlns:vm="clr-namespace:OwlWidgets.ViewModels"
+        xmlns:converters="clr-namespace:OwlWidgets.UI.Common.Converters;assembly=OwlWidgets.UI.Common"
+        Title="Owl Widgets" Icon="Assets/Images/icon.ico" Height="640" Width="960" MinHeight="420" MinWidth="720"
+        Background="{DynamicResource MaterialDesign.Brush.Background}"
+        TextElement.Foreground="{DynamicResource MaterialDesign.Brush.Foreground}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        FontFamily="{materialDesign:MaterialDesignFont}">
+    <Window.Resources>
+        <converters:EqualsToVisibilityConverter x:Key="EqualsToVisibilityConverter" />
+    </Window.Resources>
+    <!-- Screens live in Screen, not in TabItem.Content: content of a TabItem routes tooltip lookup
+         to the TabItem, and its tooltip would pop up over the whole screen.
+         The rail is aligned left: stretched, it took the whole width and left the screen column empty.
+         Dialogs of the screens open in RootDialog over the whole window. -->
+    <materialDesign:DialogHost Identifier="RootDialog" DialogTheme="Inherit">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <TabControl x:Name="Navigation"
+                        Grid.Column="0"
+                        HorizontalAlignment="Left"
+                        Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                        materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                        materialDesign:ColorZoneAssist.Mode="Standard"
+                        SelectedValuePath="Tag"
+                        SelectedValue="{Binding SelectedScreen}">
+                <TabItem Tag="{x:Static vm:ManagerScreen.Widgets}" ToolTip="{x:Static p:Strings.Nav_Widgets}">
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Kind="WidgetsOutline" Width="24" Height="24" />
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem Tag="{x:Static vm:ManagerScreen.Settings}" ToolTip="{x:Static p:Strings.Nav_Settings}">
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Kind="CogOutline" Width="24" Height="24" />
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem Tag="{x:Static vm:ManagerScreen.Log}" ToolTip="{x:Static p:Strings.Nav_Log}">
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Kind="TextBoxOutline" Width="24" Height="24" />
+                    </TabItem.Header>
+                </TabItem>
+                <TabItem Tag="{x:Static vm:ManagerScreen.About}" ToolTip="{x:Static p:Strings.Nav_About}">
+                    <TabItem.Header>
+                        <materialDesign:PackIcon Kind="InformationOutline" Width="24" Height="24" />
+                    </TabItem.Header>
+                </TabItem>
+            </TabControl>
+            <!-- The widgets screen is created once and only hidden: a template would make a new view on every
+                 switch, and the settings screen of a widget, still a child of the old one, would not enter the new one.
+                 So is the log screen: building its table anew froze the window for a moment at every switch.
+                 The other screens are picked by the type of their model. -->
+            <Grid Grid.Column="1">
+                <views:WidgetsView DataContext="{Binding Widgets}"
+                                   Visibility="{Binding DataContext.SelectedScreen, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource EqualsToVisibilityConverter}, ConverterParameter=Widgets}" />
+                <views:LogView DataContext="{Binding Log}"
+                               Visibility="{Binding DataContext.SelectedScreen, RelativeSource={RelativeSource AncestorType=Window}, Converter={StaticResource EqualsToVisibilityConverter}, ConverterParameter=Log}" />
+                <ContentControl Focusable="False" Content="{Binding CurrentScreen}" />
+            </Grid>
+        </Grid>
+    </materialDesign:DialogHost>
+</Window>

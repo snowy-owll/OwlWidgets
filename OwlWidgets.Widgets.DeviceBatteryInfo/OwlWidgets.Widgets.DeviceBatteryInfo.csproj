@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <WidgetFolder>DeviceBatteryInfo</WidgetFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Common\OwlWidgets.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+    <ProjectReference Include="..\OwlWidgets.UI.Common\OwlWidgets.UI.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Widgets.DeviceBatteryInfo.Descriptor\OwlWidgets.Widgets.DeviceBatteryInfo.Descriptor.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\WidgetPackage.targets" />
+
+  <ItemGroup>
+    <PropertyPageSchema Remove="Content.xaml" />
+  </ItemGroup>
+
+</Project>

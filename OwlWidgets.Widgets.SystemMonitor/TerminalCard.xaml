@@ -1,0 +1,97 @@
+<UserControl
+    x:Class="OwlWidgets.Widgets.SystemMonitor.TerminalCard"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sys="clr-namespace:System;assembly=System.Runtime"
+    xmlns:terminal="clr-namespace:OwlWidgets.Widgets.SystemMonitor.Terminal"
+    xmlns:vms="clr-namespace:OwlWidgets.Widgets.SystemMonitor.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vms:ContentViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OwlWidgets.UI.Common;component/Themes/Card.xaml" />
+                <ResourceDictionary Source="/OwlWidgets.Widgets.SystemMonitor;component/CardButtons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--  A button takes two cells of the grid; under the mouse they are inverted, as a terminal selection  -->
+            <sys:Double x:Key="CornerIconSize">11</sys:Double>
+            <Style x:Key="CornerButtonStyle" TargetType="Button">
+                <Setter Property="Foreground" Value="#7F848E" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="Chrome" Background="Transparent">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="#282C34" />
+                                    <Setter TargetName="Chrome" Property="Background" Value="#DCDFE4" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Chrome" Property="Background" Value="#61AFEF" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <!--
+        The terminal styles: the card is as wide as its grid of characters. The whole card is only hidden while it is
+        collapsed, so the window keeps its size; the collapsed one stands in the corner of the buttons over it.
+        Which one is shown, and the animation between them, is up to CollapseAnimation in the code-behind.
+        The buttons lie over the cells the layout leaves to them, placed by the code-behind.
+    -->
+    <Grid>
+        <Border
+            x:Name="FullCard"
+            Padding="16,14"
+            Background="{Binding CardBackground}"
+            Style="{StaticResource CardStyle}">
+            <Grid>
+                <terminal:TerminalGrid x:Name="FullGrid" />
+                <ContentControl
+                    x:Name="FullButtons"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="{Binding}"
+                    ContentTemplate="{StaticResource CardButtons}"
+                    Focusable="False" />
+            </Grid>
+        </Border>
+        <Border
+            x:Name="CollapsedCard"
+            Padding="16,14"
+            Background="{Binding CardBackground}"
+            Visibility="Hidden">
+            <Border.Style>
+                <Style BasedOn="{StaticResource CardStyle}" TargetType="Border">
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ButtonsAtTop}" Value="False">
+                            <Setter Property="VerticalAlignment" Value="Bottom" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+            <Grid>
+                <terminal:TerminalGrid x:Name="CollapsedGrid" />
+                <ContentControl
+                    x:Name="CollapsedButtons"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Content="{Binding}"
+                    ContentTemplate="{StaticResource CardButtons}"
+                    Focusable="False" />
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

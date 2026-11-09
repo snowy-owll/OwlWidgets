@@ -1,0 +1,29 @@
+Device icons of the OwlWidgets Device Battery Info widget
+
+The PNG files in this folder are made from Noto Emoji images.
+
+  Copyright 2013 Google, Inc. All Rights Reserved.
+  Licensed under the Apache License, Version 2.0 (see LICENSE.txt in this folder).
+
+Source: https://github.com/googlefonts/noto-emoji
+Commit: e20cbc2bbec1926686be9f9bee7d1d2cfa1fea0e, folder 2D/svg (its LICENSE file names Apache 2.0)
+
+Changes: the SVG files were rendered to 100x100 PNG with transparent background and renamed
+to the icon names the widget uses:
+
+  headphones         emoji_u1f3a7  headphone
+  gamepad            emoji_u1f3ae  video game
+  joystick           emoji_u1f579  joystick
+  mouse              emoji_u1f5b1  computer mouse
+  keyboard           emoji_u2328   keyboard
+  phone              emoji_u1f4f1  mobile phone
+  watch              emoji_u231a   watch
+  laptop             emoji_u1f4bb  laptop
+  speaker            emoji_u1f50a  speaker high volume
+  microphone         emoji_u1f3a4  microphone
+  studio-microphone  emoji_u1f399  studio microphone
+  pen                emoji_u1f58a  pen
+  hearing-aid        emoji_u1f9bb  ear with hearing aid
+  camera             emoji_u1f4f7  camera
+  radio              emoji_u1f4fb  radio
+  battery            emoji_u1f50b  battery

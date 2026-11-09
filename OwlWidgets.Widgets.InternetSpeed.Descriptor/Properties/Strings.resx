@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Name" xml:space="preserve">
+    <value>Internet Speed</value>
+    <comment>Widget type name in the manager</comment>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Ping, download and upload speed of the internet connection, measured with Cloudflare or M-Lab servers.</value>
+    <comment>Widget type description in the manager</comment>
+  </data>
+  <data name="Provider_Cloudflare" xml:space="preserve">
+    <value>Cloudflare</value>
+  </data>
+  <data name="Provider_MLab" xml:space="preserve">
+    <value>M-Lab (NDT7)</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>GO</value>
+    <comment>Round button in the middle of the gauge</comment>
+  </data>
+  <data name="Start_ToolTip" xml:space="preserve">
+    <value>Test the connection</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="Ping" xml:space="preserve">
+    <value>Ping</value>
+  </data>
+  <data name="Jitter" xml:space="preserve">
+    <value>Jitter {0}</value>
+    <comment>{0}: jitter with its unit</comment>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Unit_Mbps" xml:space="preserve">
+    <value>Mbps</value>
+  </data>
+  <data name="Unit_Ms" xml:space="preserve">
+    <value>ms</value>
+  </data>
+  <data name="Phase_Connecting" xml:space="preserve">
+    <value>Finding a server…</value>
+  </data>
+  <data name="Phase_Latency" xml:space="preserve">
+    <value>Measuring ping…</value>
+  </data>
+  <data name="Phase_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="Phase_Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Status_Never" xml:space="preserve">
+    <value>No tests yet</value>
+  </data>
+  <data name="Status_Last" xml:space="preserve">
+    <value>Tested {0}</value>
+    <comment>{0}: time of the last test, with the date if not today</comment>
+  </data>
+  <data name="Status_Failed" xml:space="preserve">
+    <value>Test failed</value>
+  </data>
+  <data name="Status_FailedLast" xml:space="preserve">
+    <value>Test failed. Last result {0}</value>
+    <comment>{0}: time of the last successful test, with the date if not today</comment>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Test stopped</value>
+  </data>
+  <data name="Status_StoppedLast" xml:space="preserve">
+    <value>Test stopped. Last result {0}</value>
+    <comment>{0}: time of the last successful test, with the date if not today</comment>
+  </data>
+  <data name="Settings_Provider" xml:space="preserve">
+    <value>Servers</value>
+  </data>
+  <data name="Settings_ProviderNote_Cloudflare" xml:space="preserve">
+    <value>speed.cloudflare.com, the nearest Cloudflare data center. Several connections at once, as Speedtest does.</value>
+  </data>
+  <data name="Settings_ProviderNote_MLab" xml:space="preserve">
+    <value>Measurement Lab, the nearest server of the NDT7 network. One connection, up to 10 seconds per direction. M-Lab publishes every test with the IP address as open data.</value>
+  </data>
+  <data name="Settings_Streams" xml:space="preserve">
+    <value>Connections at once, {0}–{1}</value>
+  </data>
+  <data name="Settings_Duration" xml:space="preserve">
+    <value>Duration of each direction, seconds, {0}–{1}</value>
+  </data>
+  <data name="Settings_AutoInterval" xml:space="preserve">
+    <value>Test automatically every … minutes, at least {0}; 0: only by the button</value>
+  </data>
+  <data name="Settings_TrafficNote" xml:space="preserve">
+    <value>A test on a fast connection uses hundreds of megabytes of traffic. Keep the automatic tests off on a metered connection.</value>
+  </data>
+  <data name="Settings_ButtonCorner" xml:space="preserve">
+    <value>Buttons on the card</value>
+  </data>
+  <data name="Settings_ButtonsAtAnchor" xml:space="preserve">
+    <value>In the anchor corner of the widget</value>
+  </data>
+  <data name="Collapse" xml:space="preserve">
+    <value>Hide</value>
+    <comment>Tooltip of the button that shrinks the card to its icon</comment>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Show</value>
+    <comment>Tooltip of the same button on a hidden card</comment>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Move</value>
+    <comment>Tooltip of the button that turns on the move mode of the card</comment>
+  </data>
+  <data name="Collapsed_Result" xml:space="preserve">
+    <value>Ping {0} ms · ↓ {1} · ↑ {2} Mbps</value>
+    <comment>Tooltip of the icon of a hidden card. {0}: ping; {1}: download; {2}: upload</comment>
+  </data>
+  <data name="Error_Streams" xml:space="preserve">
+    <value>Connections: a whole number from {0} to {1}.</value>
+  </data>
+  <data name="Error_Duration" xml:space="preserve">
+    <value>Duration: a whole number of seconds from {0} to {1}.</value>
+  </data>
+  <data name="Error_AutoInterval" xml:space="preserve">
+    <value>Interval: 0 or a whole number of minutes, at least {0}.</value>
+  </data>
+</root>

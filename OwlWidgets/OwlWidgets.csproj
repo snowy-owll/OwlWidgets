@@ -1,0 +1,105 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ApplicationIcon>Assets\Images\icon.ico</ApplicationIcon>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <!-- Bump ReleaseDate together with Version. -->
+    <Version>0.13.1</Version>
+    <ReleaseDate>2026-11-10</ReleaseDate>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="ReleaseDate" Value="$(ReleaseDate)" />
+    <InternalsVisibleTo Include="OwlWidgets.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\Images\icon.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Assets\Images\icon.ico" />
+    <Resource Include="Assets\Images\icon.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Common\OwlWidgets.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Protocol\OwlWidgets.Protocol.csproj" />
+    <!-- The commands of the manager screens; the wrapper and the widgets take it from this folder too. -->
+    <ProjectReference Include="..\OwlWidgets.UI.Common\OwlWidgets.UI.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.WidgetHost\OwlWidgets.WidgetHost.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.DeviceBatteryInfo\OwlWidgets.Widgets.DeviceBatteryInfo.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.SystemMonitor\OwlWidgets.Widgets.SystemMonitor.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.Weather\OwlWidgets.Widgets.Weather.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.CurrencyRates\OwlWidgets.Widgets.CurrencyRates.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.BluetoothAudio\OwlWidgets.Widgets.BluetoothAudio.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.InternetSpeed\OwlWidgets.Widgets.InternetSpeed.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+    <ProjectReference Include="..\OwlWidgets.Widgets.NetworkMonitor\OwlWidgets.Widgets.NetworkMonitor.csproj">
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+    </ProjectReference>
+  </ItemGroup>
+
+  <!--
+    The widget references above only order the build: WidgetPackage.targets stages each widget
+    into $(OutDir)Widgets\{WidgetFolder}. Publish carries the staged packages along.
+    The wrapper is staged the same way, by CopyHostBesideManager in its own project: publish knows
+    only its exe, deps.json and runtimeconfig.json from the reference, so its dll, pdb and
+    translations are carried from $(OutDir) too; without the dll no card would start.
+  -->
+  <Target Name="PublishWidgetPackages" AfterTargets="Publish">
+    <ItemGroup>
+      <_WidgetPackageFiles Include="$(OutDir)Widgets\**\*.*" />
+      <_HostFiles Include="$(OutDir)OwlWidgets.WidgetHost.dll;$(OutDir)OwlWidgets.WidgetHost.pdb" />
+      <_HostSatellites Include="$(OutDir)**\OwlWidgets.WidgetHost.resources.dll"
+                       Exclude="$(OutDir)publish\**;$(OutDir)Widgets\**" />
+    </ItemGroup>
+    <Copy SourceFiles="@(_WidgetPackageFiles)"
+          DestinationFiles="@(_WidgetPackageFiles->'$(PublishDir)Widgets\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_HostFiles)" DestinationFolder="$(PublishDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_HostSatellites)"
+          DestinationFiles="@(_HostSatellites->'$(PublishDir)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

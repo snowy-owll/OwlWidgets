@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Загрузка процессора и видеокарт, занятая память, свободное место на дисках и температуры — от Windows или программы датчиков (HWiNFO, MSI Afterburner, LibreHardwareMonitor); температура процессора — только от программы датчиков.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Системный монитор</value>
+  </data>
+  <data name="DiskSpace" xml:space="preserve">
+    <value>ДИСКИ</value>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>СИСТЕМА</value>
+  </data>
+  <data name="Cpu" xml:space="preserve">
+    <value>Процессор</value>
+  </data>
+  <data name="CpuUsage" xml:space="preserve">
+    <value>Загрузка процессора</value>
+  </data>
+  <data name="RamUsage" xml:space="preserve">
+    <value>Оперативная память</value>
+  </data>
+  <data name="CpuTemperature_StartAny" xml:space="preserve">
+    <value>Запустите HWiNFO, Afterburner или LibreHardwareMonitor</value>
+  </data>
+  <data name="CpuTemperature_StartHWiNFO" xml:space="preserve">
+    <value>Запустите HWiNFO с общей памятью</value>
+  </data>
+  <data name="CpuTemperature_StartAfterburner" xml:space="preserve">
+    <value>Запустите MSI Afterburner</value>
+  </data>
+  <data name="CpuTemperature_StartLibreHardwareMonitor" xml:space="preserve">
+    <value>Запустите веб-сервер LibreHardwareMonitor</value>
+  </data>
+  <data name="CpuTemperature_NoProvider" xml:space="preserve">
+    <value>Windows её не сообщает: выберите программу датчиков в настройках</value>
+  </data>
+  <data name="CpuTemperature_NotReported" xml:space="preserve">
+    <value>Программа датчиков её не сообщает</value>
+  </data>
+  <data name="Gpu_Asleep" xml:space="preserve">
+    <value>Не активна</value>
+  </data>
+  <data name="Settings_Provider" xml:space="preserve">
+    <value>Программа датчиков</value>
+  </data>
+  <data name="Provider_Auto" xml:space="preserve">
+    <value>Автоматически</value>
+  </data>
+  <data name="Provider_Windows" xml:space="preserve">
+    <value>Нет, только Windows</value>
+  </data>
+  <data name="Provider_HWiNFO" xml:space="preserve">
+    <value>HWiNFO</value>
+  </data>
+  <data name="Provider_Afterburner" xml:space="preserve">
+    <value>MSI Afterburner</value>
+  </data>
+  <data name="Provider_LibreHardwareMonitor" xml:space="preserve">
+    <value>LibreHardwareMonitor</value>
+  </data>
+  <data name="Settings_ProviderNote" xml:space="preserve">
+    <value>Температуру процессора даёт только программа датчиков, запущенная рядом с виджетом. Загрузка процессора и видеокарты берутся из программы, если она их сообщает, иначе от Windows; все видеокарты — из одного источника. Память и диски — всегда от Windows. «Автоматически» — первая найденная программа: HWiNFO, затем MSI Afterburner, затем LibreHardwareMonitor.</value>
+  </data>
+  <data name="Settings_HWiNFONote" xml:space="preserve">
+    <value>В HWiNFO включите Shared Memory Support в настройках. В бесплатной версии она работает 12 часов, потом её нужно включить снова.</value>
+  </data>
+  <data name="Settings_AfterburnerNote" xml:space="preserve">
+    <value>MSI Afterburner отдаёт графики, включённые на вкладке «Мониторинг» его настроек: включите температуру и загрузку ЦП и ГП. Температуру процессора он сообщает не на всех компьютерах.</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorNote" xml:space="preserve">
+    <value>В LibreHardwareMonitor запустите веб-сервер: Options → Remote Web Server → Run. Если там изменён порт или включена HTTP-аутентификация, укажите здесь то же самое. Сервер открыт для локальной сети: если сеть не только ваша, включите аутентификацию.</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorAddress" xml:space="preserve">
+    <value>Адрес веб-сервера LibreHardwareMonitor</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorUserName" xml:space="preserve">
+    <value>Имя пользователя, если включена аутентификация</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorPassword" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorAddressInvalid" xml:space="preserve">
+    <value>Введите адрес веб-сервера, например http://localhost:8085</value>
+  </data>
+  <data name="Settings_Sections" xml:space="preserve">
+    <value>Блоки карточки</value>
+  </data>
+  <data name="Settings_SectionsNote" xml:space="preserve">
+    <value>Выключенный блок не только скрыт, но и не опрашивается.</value>
+  </data>
+  <data name="Settings_ShowDrives" xml:space="preserve">
+    <value>Диски</value>
+  </data>
+  <data name="Settings_ShowSystem" xml:space="preserve">
+    <value>Система: загрузка процессора, памяти и видеокарт</value>
+  </data>
+  <data name="Settings_ShowTemperatures" xml:space="preserve">
+    <value>Температура</value>
+  </data>
+  <data name="Settings_NetworkDrives" xml:space="preserve">
+    <value>Сетевые диски</value>
+  </data>
+  <data name="Settings_ExternalDrives" xml:space="preserve">
+    <value>Внешние диски: USB, карты памяти, оптические диски</value>
+  </data>
+  <data name="Settings_Drives" xml:space="preserve">
+    <value>Диски на карточке:</value>
+  </data>
+  <data name="Settings_DrivesNote" xml:space="preserve">
+    <value>Выключенные диски не опрашиваются: виджет не обращается к сетевому диску без связи и не будит уснувший внешний диск.</value>
+  </data>
+  <data name="Format_DriveLabel" xml:space="preserve">
+    <value>{0} ({1})</value>
+  </data>
+  <data name="Format_DriveMissing" xml:space="preserve">
+    <value>{0} (не подключён)</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>ТЕМПЕРАТУРА</value>
+  </data>
+  <data name="Format_Usage" xml:space="preserve">
+    <value>Загрузка {0}</value>
+  </data>
+  <data name="Format_Gigabytes" xml:space="preserve">
+    <value>{0:.#} ГБ</value>
+  </data>
+  <data name="Format_GigabytesUsed" xml:space="preserve">
+    <value>{0:.#} ГБ занято</value>
+  </data>
+  <data name="Settings_Style" xml:space="preserve">
+    <value>Стиль</value>
+  </data>
+  <data name="Settings_StyleNote" xml:space="preserve">
+    <value>Чтобы сменить стиль, карточка перезапустится.</value>
+  </data>
+  <data name="Style_Classic" xml:space="preserve">
+    <value>Классический</value>
+  </data>
+  <data name="Style_Classic_Note" xml:space="preserve">
+    <value>Плитки, кольца и полосы под цветной шапкой.</value>
+  </data>
+  <data name="Style_Report" xml:space="preserve">
+    <value>CLI-отчёт</value>
+  </data>
+  <data name="Style_Report_Note" xml:space="preserve">
+    <value>Дерево строк между двумя линиями, точечные полосы и плашки состояния, как у утилиты командной строки.</value>
+  </data>
+  <data name="Style_Htop" xml:space="preserve">
+    <value>htop</value>
+  </data>
+  <data name="Style_Htop_Note" xml:space="preserve">
+    <value>Метры в скобках, значение поверх полосы. Самый плотный.</value>
+  </data>
+  <data name="Style_Prompt" xml:space="preserve">
+    <value>Промпт</value>
+  </data>
+  <data name="Style_Prompt_Note" xml:space="preserve">
+    <value>Строка команды вместо шапки, значки разделов и плавные полосы из блоков.</value>
+  </data>
+  <data name="Style_Btop" xml:space="preserve">
+    <value>btop</value>
+  </data>
+  <data name="Style_Btop_Note" xml:space="preserve">
+    <value>Разделы в рамках, градиентные полосы и недавняя загрузка и температура спарклайнами.</value>
+  </data>
+  <data name="Style_Board" xml:space="preserve">
+    <value>Табло</value>
+  </data>
+  <data name="Style_Board_Note" xml:space="preserve">
+    <value>Таблица как табло вылетов: загрузка и температура устройства в одной строке.</value>
+  </data>
+  <data name="Term_Disks" xml:space="preserve">
+    <value>Диски</value>
+  </data>
+  <data name="Term_System" xml:space="preserve">
+    <value>Система</value>
+  </data>
+  <data name="Term_Temperature" xml:space="preserve">
+    <value>Температура</value>
+  </data>
+  <data name="Term_Cpu" xml:space="preserve">
+    <value>ЦП</value>
+  </data>
+  <data name="Term_Ram" xml:space="preserve">
+    <value>ОЗУ</value>
+  </data>
+  <data name="Term_Gpu" xml:space="preserve">
+    <value>ГП</value>
+  </data>
+  <data name="Term_Memory" xml:space="preserve">
+    <value>Память</value>
+  </data>
+  <data name="Term_Ok" xml:space="preserve">
+    <value>НОРМ</value>
+  </data>
+  <data name="Term_Warm" xml:space="preserve">
+    <value>ТЕПЛО</value>
+  </data>
+  <data name="Term_Hot" xml:space="preserve">
+    <value>ЖАРКО</value>
+  </data>
+  <data name="Term_Idle" xml:space="preserve">
+    <value>СОН</value>
+  </data>
+  <data name="Term_NoValue" xml:space="preserve">
+    <value>НЕТ</value>
+  </data>
+  <data name="Term_Device" xml:space="preserve">
+    <value>УСТРОЙСТВО</value>
+  </data>
+  <data name="Term_Load" xml:space="preserve">
+    <value>НАГРУЗКА</value>
+  </data>
+  <data name="Term_Temp" xml:space="preserve">
+    <value>ТЕМП.</value>
+  </data>
+  <data name="Term_Disk" xml:space="preserve">
+    <value>ДИСК</value>
+  </data>
+  <data name="Term_Used" xml:space="preserve">
+    <value>ЗАНЯТО</value>
+  </data>
+  <data name="Term_Size" xml:space="preserve">
+    <value>ОБЪЁМ</value>
+  </data>
+  <data name="Format_TermSize" xml:space="preserve">
+    <value>{0}/{1}Г</value>
+  </data>
+  <data name="Style_ImHex" xml:space="preserve">
+    <value>ImHex</value>
+  </data>
+  <data name="Style_ImHex_Note" xml:space="preserve">
+    <value>Виджеты Dear ImGui, как в ImHex: вкладка окна, сворачиваемые заголовки, таблицы, полосы прогресса и график загрузки.</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="ImHex_Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="ImHex_Used" xml:space="preserve">
+    <value>Занято</value>
+  </data>
+  <data name="ImHex_Load" xml:space="preserve">
+    <value>Нагрузка</value>
+  </data>
+  <data name="ImHex_Color" xml:space="preserve">
+    <value>Цв</value>
+  </data>
+  <data name="ImHex_Value" xml:space="preserve">
+    <value>Знач.</value>
+  </data>
+  <data name="ImHex_Min" xml:space="preserve">
+    <value>Мин</value>
+  </data>
+  <data name="ImHex_Max" xml:space="preserve">
+    <value>Макс</value>
+  </data>
+  <data name="ImHex_CpuHistory" xml:space="preserve">
+    <value>ЦП · 40 с</value>
+  </data>
+  <data name="Format_ImHexDrive" xml:space="preserve">
+    <value>{0:0}% · {1:0}/{2:0} ГБ</value>
+  </data>
+  <data name="Format_ImHexMemory" xml:space="preserve">
+    <value>{0:0}% · {1:0.0}/{2:0.0} ГБ</value>
+  </data>
+  <data name="ImHex_Idle" xml:space="preserve">
+    <value>сон</value>
+  </data>
+  <data name="ImHex_NoValue" xml:space="preserve">
+    <value>нет</value>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Поверх всех окон</value>
+  </data>
+  <data name="Unpin" xml:space="preserve">
+    <value>Снова под окнами</value>
+  </data>
+  <data name="Collapse" xml:space="preserve">
+    <value>Свернуть</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Развернуть</value>
+  </data>
+  <data name="Settings_ButtonCorner" xml:space="preserve">
+    <value>Кнопки на карточке</value>
+  </data>
+  <data name="Settings_ButtonsAtAnchor" xml:space="preserve">
+    <value>В углу точки отсчёта виджета</value>
+  </data>
+  <data name="Settings_ButtonsNote" xml:space="preserve">
+    <value>Переместить карточку, держать её поверх всех окон, в том числе игр, и свернуть. Свёрнутая карточка стоит в этом углу.</value>
+  </data>
+  <data name="Settings_Collapsed" xml:space="preserve">
+    <value>Свёрнутая карточка</value>
+  </data>
+  <data name="Settings_CollapsedNote" xml:space="preserve">
+    <value>Значения выключенного блока не показываются. Что не помещается в строку, переходит на следующую.</value>
+  </data>
+  <data name="Settings_Background" xml:space="preserve">
+    <value>Непрозрачность фона</value>
+  </data>
+  <data name="Settings_BackgroundValue" xml:space="preserve">
+    <value>{0} %</value>
+  </data>
+  <data name="Settings_BackgroundReset" xml:space="preserve">
+    <value>По умолчанию</value>
+  </data>
+  <data name="Settings_BackgroundNote" xml:space="preserve">
+    <value>Фон карточки в любом стиле, в том числе свёрнутой. Текст и полосы остаются как есть.</value>
+  </data>
+  <data name="Collapsed_CpuLoad" xml:space="preserve">
+    <value>Загрузка процессора</value>
+  </data>
+  <data name="Collapsed_Memory" xml:space="preserve">
+    <value>Память</value>
+  </data>
+  <data name="Collapsed_GpuLoad" xml:space="preserve">
+    <value>Загрузка видеокарт</value>
+  </data>
+  <data name="Collapsed_CpuTemperature" xml:space="preserve">
+    <value>Температура процессора</value>
+  </data>
+  <data name="Collapsed_GpuTemperature" xml:space="preserve">
+    <value>Температура видеокарт</value>
+  </data>
+  <data name="Collapsed_Drives" xml:space="preserve">
+    <value>Диски</value>
+  </data>
+</root>

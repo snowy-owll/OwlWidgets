@@ -1,0 +1,442 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Load of the processor and the graphics cards, memory use, free disk space and temperatures, from Windows or from a sensor program (HWiNFO, MSI Afterburner, LibreHardwareMonitor); the processor temperature only from a sensor program.</value>
+    <comment>Widget type description in the manager</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>System Monitor</value>
+    <comment>Widget type name in the manager and the card title</comment>
+  </data>
+  <data name="DiskSpace" xml:space="preserve">
+    <value>DISK SPACE</value>
+    <comment>Section title, upper case</comment>
+  </data>
+  <data name="System" xml:space="preserve">
+    <value>SYSTEM</value>
+    <comment>Section title, upper case</comment>
+  </data>
+  <data name="Cpu" xml:space="preserve">
+    <value>Processor</value>
+    <comment>Name of the CPU tile when Windows does not tell the model</comment>
+  </data>
+  <data name="CpuUsage" xml:space="preserve">
+    <value>CPU Usage</value>
+  </data>
+  <data name="RamUsage" xml:space="preserve">
+    <value>RAM Usage</value>
+  </data>
+  <data name="CpuTemperature_StartAny" xml:space="preserve">
+    <value>Start HWiNFO, Afterburner or LibreHardwareMonitor to see it</value>
+    <comment>In place of the CPU temperature: the program is automatic and none is running</comment>
+  </data>
+  <data name="CpuTemperature_StartHWiNFO" xml:space="preserve">
+    <value>Start HWiNFO with shared memory to see it</value>
+    <comment>In place of the CPU temperature: HWiNFO is chosen and is not running</comment>
+  </data>
+  <data name="CpuTemperature_StartAfterburner" xml:space="preserve">
+    <value>Start MSI Afterburner to see it</value>
+    <comment>In place of the CPU temperature: MSI Afterburner is chosen and is not running</comment>
+  </data>
+  <data name="CpuTemperature_StartLibreHardwareMonitor" xml:space="preserve">
+    <value>Start the LibreHardwareMonitor web server to see it</value>
+    <comment>In place of the CPU temperature: LibreHardwareMonitor is chosen and its web server does not answer</comment>
+  </data>
+  <data name="CpuTemperature_NoProvider" xml:space="preserve">
+    <value>Windows does not report it: choose a sensor program in the settings</value>
+    <comment>In place of the CPU temperature: the instance is set to Windows only</comment>
+  </data>
+  <data name="CpuTemperature_NotReported" xml:space="preserve">
+    <value>The sensor program does not report it</value>
+    <comment>In place of the CPU temperature: the program runs but has none</comment>
+  </data>
+  <data name="Gpu_Asleep" xml:space="preserve">
+    <value>Not active</value>
+    <comment>In place of the temperature of a graphics card that is powered off to save power</comment>
+  </data>
+  <data name="Settings_Provider" xml:space="preserve">
+    <value>Sensor program</value>
+  </data>
+  <data name="Provider_Auto" xml:space="preserve">
+    <value>Automatic</value>
+  </data>
+  <data name="Provider_Windows" xml:space="preserve">
+    <value>None, Windows only</value>
+  </data>
+  <data name="Provider_HWiNFO" xml:space="preserve">
+    <value>HWiNFO</value>
+  </data>
+  <data name="Provider_Afterburner" xml:space="preserve">
+    <value>MSI Afterburner</value>
+  </data>
+  <data name="Provider_LibreHardwareMonitor" xml:space="preserve">
+    <value>LibreHardwareMonitor</value>
+  </data>
+  <data name="Settings_ProviderNote" xml:space="preserve">
+    <value>The processor temperature comes only from a sensor program running beside the widget. The processor load and the graphics cards are taken from the program when it reports them, otherwise from Windows; all graphics cards come from one of the two. Memory and disks always come from Windows. Automatic uses the first program found: HWiNFO, then MSI Afterburner, then LibreHardwareMonitor.</value>
+  </data>
+  <data name="Settings_HWiNFONote" xml:space="preserve">
+    <value>In HWiNFO, turn on Shared Memory Support in its settings. The free version keeps it on for 12 hours, then it has to be turned on again.</value>
+  </data>
+  <data name="Settings_AfterburnerNote" xml:space="preserve">
+    <value>MSI Afterburner shares the graphs turned on on the Monitoring tab of its settings: turn on the temperature and usage of the CPU and the GPUs. It reports the CPU temperature not on every computer.</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorNote" xml:space="preserve">
+    <value>In LibreHardwareMonitor, start the web server: Options → Remote Web Server → Run. If its port was changed there or HTTP authentication turned on, enter the same here. The server is open to the local network: turn on authentication if the network is not only yours.</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorAddress" xml:space="preserve">
+    <value>LibreHardwareMonitor web server address</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorUserName" xml:space="preserve">
+    <value>User name, if authentication is on</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Settings_LibreHardwareMonitorAddressInvalid" xml:space="preserve">
+    <value>Enter the address of the web server, for example http://localhost:8085</value>
+  </data>
+  <data name="Settings_Sections" xml:space="preserve">
+    <value>Sections of the card</value>
+  </data>
+  <data name="Settings_SectionsNote" xml:space="preserve">
+    <value>A section turned off is not read either.</value>
+  </data>
+  <data name="Settings_ShowDrives" xml:space="preserve">
+    <value>Disks</value>
+  </data>
+  <data name="Settings_ShowSystem" xml:space="preserve">
+    <value>System: CPU, memory and video card load</value>
+  </data>
+  <data name="Settings_ShowTemperatures" xml:space="preserve">
+    <value>Temperature</value>
+  </data>
+  <data name="Settings_NetworkDrives" xml:space="preserve">
+    <value>Network drives</value>
+  </data>
+  <data name="Settings_ExternalDrives" xml:space="preserve">
+    <value>External drives: USB, memory cards, optical discs</value>
+  </data>
+  <data name="Settings_Drives" xml:space="preserve">
+    <value>Drives on the card:</value>
+  </data>
+  <data name="Settings_DrivesNote" xml:space="preserve">
+    <value>Drives turned off are not read: the widget does not reach for a network drive without a connection and does not wake a sleeping external disk.</value>
+  </data>
+  <data name="Format_DriveLabel" xml:space="preserve">
+    <value>{0} ({1})</value>
+    <comment>A drive root and its volume label</comment>
+  </data>
+  <data name="Format_DriveMissing" xml:space="preserve">
+    <value>{0} (not connected)</value>
+    <comment>A local drive turned off in the settings that is not in the computer now</comment>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>TEMPERATURE</value>
+    <comment>Section title, upper case</comment>
+  </data>
+  <data name="Format_Usage" xml:space="preserve">
+    <value>{0} Usage</value>
+    <comment>{0} is a device name, for example GPU D3D</comment>
+  </data>
+  <data name="Format_Gigabytes" xml:space="preserve">
+    <value>{0:.#} GB</value>
+  </data>
+  <data name="Format_GigabytesUsed" xml:space="preserve">
+    <value>{0:.#} GB used</value>
+    <comment>Follows the used space: 120.5 GB / 465.8 GB used</comment>
+  </data>
+  <data name="Settings_Style" xml:space="preserve">
+    <value>Style</value>
+  </data>
+  <data name="Settings_StyleNote" xml:space="preserve">
+    <value>The card restarts to take another style.</value>
+  </data>
+  <data name="Style_Classic" xml:space="preserve">
+    <value>Classic</value>
+  </data>
+  <data name="Style_Classic_Note" xml:space="preserve">
+    <value>Tiles, rings and bars under a coloured header.</value>
+  </data>
+  <data name="Style_Report" xml:space="preserve">
+    <value>CLI report</value>
+  </data>
+  <data name="Style_Report_Note" xml:space="preserve">
+    <value>A tree of rows between two lines, dotted bars and status badges, like a command line tool.</value>
+  </data>
+  <data name="Style_Htop" xml:space="preserve">
+    <value>htop</value>
+  </data>
+  <data name="Style_Htop_Note" xml:space="preserve">
+    <value>Meters in brackets with the value over the bar. The most compact.</value>
+  </data>
+  <data name="Style_Prompt" xml:space="preserve">
+    <value>Prompt</value>
+  </data>
+  <data name="Style_Prompt_Note" xml:space="preserve">
+    <value>A command line for a header, section icons and smooth bars of blocks.</value>
+  </data>
+  <data name="Style_Btop" xml:space="preserve">
+    <value>btop</value>
+  </data>
+  <data name="Style_Btop_Note" xml:space="preserve">
+    <value>Sections in frames, gradient bars and the recent load and temperature as sparklines.</value>
+  </data>
+  <data name="Style_Board" xml:space="preserve">
+    <value>Board</value>
+  </data>
+  <data name="Style_Board_Note" xml:space="preserve">
+    <value>A table like a departure board: the load and temperature of a device in one row.</value>
+  </data>
+  <data name="Term_Disks" xml:space="preserve">
+    <value>Disks</value>
+    <comment>A section title of the terminal styles</comment>
+  </data>
+  <data name="Term_System" xml:space="preserve">
+    <value>System</value>
+    <comment>A section title of the terminal styles</comment>
+  </data>
+  <data name="Term_Temperature" xml:space="preserve">
+    <value>Temperature</value>
+    <comment>A section title of the terminal styles</comment>
+  </data>
+  <data name="Term_Cpu" xml:space="preserve">
+    <value>CPU</value>
+    <comment>A row label of the terminal styles, at most 3 characters</comment>
+  </data>
+  <data name="Term_Ram" xml:space="preserve">
+    <value>RAM</value>
+    <comment>A row label of the terminal styles, at most 3 characters</comment>
+  </data>
+  <data name="Term_Gpu" xml:space="preserve">
+    <value>GPU</value>
+    <comment>A row label of the terminal styles, at most 3 characters</comment>
+  </data>
+  <data name="Term_Memory" xml:space="preserve">
+    <value>Memory</value>
+    <comment>The memory row of the Board style</comment>
+  </data>
+  <data name="Term_Ok" xml:space="preserve">
+    <value>OK</value>
+    <comment>A temperature badge, at most 6 characters</comment>
+  </data>
+  <data name="Term_Warm" xml:space="preserve">
+    <value>WARM</value>
+    <comment>A temperature badge, at most 6 characters</comment>
+  </data>
+  <data name="Term_Hot" xml:space="preserve">
+    <value>HOT</value>
+    <comment>A temperature badge, at most 6 characters</comment>
+  </data>
+  <data name="Term_Idle" xml:space="preserve">
+    <value>IDLE</value>
+    <comment>A video card powered off to save power; a badge, at most 6 characters</comment>
+  </data>
+  <data name="Term_NoValue" xml:space="preserve">
+    <value>N/A</value>
+    <comment>No temperature; a badge, at most 6 characters</comment>
+  </data>
+  <data name="Term_Device" xml:space="preserve">
+    <value>DEVICE</value>
+    <comment>A column of the Board style</comment>
+  </data>
+  <data name="Term_Load" xml:space="preserve">
+    <value>LOAD</value>
+    <comment>A column of the Board style, at most 11 characters</comment>
+  </data>
+  <data name="Term_Temp" xml:space="preserve">
+    <value>TEMP</value>
+    <comment>A column of the Board style, at most 10 characters</comment>
+  </data>
+  <data name="Term_Disk" xml:space="preserve">
+    <value>DISK</value>
+    <comment>A column of the Board style</comment>
+  </data>
+  <data name="Term_Used" xml:space="preserve">
+    <value>USED</value>
+    <comment>A column of the Board style, at most 11 characters</comment>
+  </data>
+  <data name="Term_Size" xml:space="preserve">
+    <value>SIZE</value>
+    <comment>A column of the Board style, at most 10 characters</comment>
+  </data>
+  <data name="Format_TermSize" xml:space="preserve">
+    <value>{0}/{1}G</value>
+    <comment>Used and total gigabytes in the terminal styles: 412/932G</comment>
+  </data>
+  <data name="Style_ImHex" xml:space="preserve">
+    <value>ImHex</value>
+  </data>
+  <data name="Style_ImHex_Note" xml:space="preserve">
+    <value>The widgets of Dear ImGui, as in ImHex: a window tab, collapsing headers, tables, progress bars and a plot of the load.</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Move</value>
+    <comment>The button that starts the move mode of the card</comment>
+  </data>
+  <data name="ImHex_Name" xml:space="preserve">
+    <value>Name</value>
+    <comment>A column header of the ImHex style</comment>
+  </data>
+  <data name="ImHex_Used" xml:space="preserve">
+    <value>Used</value>
+    <comment>A column header of the ImHex style</comment>
+  </data>
+  <data name="ImHex_Load" xml:space="preserve">
+    <value>Load</value>
+    <comment>A column header of the ImHex style</comment>
+  </data>
+  <data name="ImHex_Color" xml:space="preserve">
+    <value>Col</value>
+    <comment>A narrow column of the ImHex style with a colour swatch, at most 3 characters</comment>
+  </data>
+  <data name="ImHex_Value" xml:space="preserve">
+    <value>Value</value>
+    <comment>A column header of the ImHex style, at most 7 characters</comment>
+  </data>
+  <data name="ImHex_Min" xml:space="preserve">
+    <value>Min</value>
+    <comment>A column header of the ImHex style, at most 4 characters</comment>
+  </data>
+  <data name="ImHex_Max" xml:space="preserve">
+    <value>Max</value>
+    <comment>A column header of the ImHex style, at most 4 characters</comment>
+  </data>
+  <data name="ImHex_CpuHistory" xml:space="preserve">
+    <value>CPU · 40 s</value>
+    <comment>The label of the plot of the CPU load over the last 40 seconds</comment>
+  </data>
+  <data name="Format_ImHexDrive" xml:space="preserve">
+    <value>{0:0}% · {1:0}/{2:0} GB</value>
+    <comment>Over a drive bar: percent, used and total gigabytes</comment>
+  </data>
+  <data name="Format_ImHexMemory" xml:space="preserve">
+    <value>{0:0}% · {1:0.0}/{2:0.0} GB</value>
+    <comment>Over the memory bar: percent, used and total gigabytes</comment>
+  </data>
+  <data name="ImHex_Idle" xml:space="preserve">
+    <value>idle</value>
+    <comment>In place of the temperature of a video card asleep, ImHex style, at most 7 characters</comment>
+  </data>
+  <data name="ImHex_NoValue" xml:space="preserve">
+    <value>n/a</value>
+    <comment>In place of a missing temperature, ImHex style, at most 7 characters</comment>
+  </data>
+  <data name="Pin" xml:space="preserve">
+    <value>Keep above all windows</value>
+    <comment>Tooltip of the pin button on the card</comment>
+  </data>
+  <data name="Unpin" xml:space="preserve">
+    <value>Put back under windows</value>
+    <comment>Tooltip of the pin button while the card is above all windows</comment>
+  </data>
+  <data name="Collapse" xml:space="preserve">
+    <value>Collapse</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Expand</value>
+  </data>
+  <data name="Settings_ButtonCorner" xml:space="preserve">
+    <value>Buttons on the card</value>
+  </data>
+  <data name="Settings_ButtonsAtAnchor" xml:space="preserve">
+    <value>In the anchor corner of the widget</value>
+  </data>
+  <data name="Settings_ButtonsNote" xml:space="preserve">
+    <value>Move the card, keep it above all windows, games included, and collapse it. A collapsed card stands in this corner.</value>
+  </data>
+  <data name="Settings_Collapsed" xml:space="preserve">
+    <value>Collapsed card</value>
+  </data>
+  <data name="Settings_CollapsedNote" xml:space="preserve">
+    <value>The values of a section turned off are not shown. What does not fit in one line goes to the next one.</value>
+  </data>
+  <data name="Settings_Background" xml:space="preserve">
+    <value>Background opacity</value>
+  </data>
+  <data name="Settings_BackgroundValue" xml:space="preserve">
+    <value>{0} %</value>
+  </data>
+  <data name="Settings_BackgroundReset" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Settings_BackgroundNote" xml:space="preserve">
+    <value>The background of the card in every style, the collapsed one too. The text and the bars stay as they are.</value>
+  </data>
+  <data name="Collapsed_CpuLoad" xml:space="preserve">
+    <value>Processor load</value>
+  </data>
+  <data name="Collapsed_Memory" xml:space="preserve">
+    <value>Memory</value>
+  </data>
+  <data name="Collapsed_GpuLoad" xml:space="preserve">
+    <value>Video card load</value>
+  </data>
+  <data name="Collapsed_CpuTemperature" xml:space="preserve">
+    <value>Processor temperature</value>
+  </data>
+  <data name="Collapsed_GpuTemperature" xml:space="preserve">
+    <value>Video card temperature</value>
+  </data>
+  <data name="Collapsed_Drives" xml:space="preserve">
+    <value>Drives</value>
+  </data>
+</root>

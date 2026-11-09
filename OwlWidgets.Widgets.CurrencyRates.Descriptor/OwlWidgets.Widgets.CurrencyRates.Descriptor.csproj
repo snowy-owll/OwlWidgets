@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>OwlWidgets.Widgets.CurrencyRates</RootNamespace>
+    <WidgetFolder>CurrencyRates</WidgetFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+  </ItemGroup>
+
+  <!-- Strings of the whole widget: the settings screen here and the runtime view, which references this assembly. -->
+  <ItemGroup>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- Icon of the widget type in the manager: "Dollar swap to euro" Pinhead icon, CC0, Wikimedia Commons, recolored. -->
+  <ItemGroup>
+    <Resource Include="Assets\Icon.png" />
+  </ItemGroup>
+
+  <!--
+    Flags: hampusborgos/country-flags (Wikimedia Commons), public domain, rendered to 64x64 squares.
+    Embedded, not Resource: read by CurrencyCatalog from the manifest in both the manager and the wrapper.
+  -->
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Flags\*.png" LogicalName="Flags.%(Filename)%(Extension)" />
+  </ItemGroup>
+
+  <Import Project="..\WidgetPackage.targets" />
+
+</Project>

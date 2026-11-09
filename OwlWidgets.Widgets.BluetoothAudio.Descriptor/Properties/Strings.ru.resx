@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Показывает, подключено ли спаренное аудиоустройство Bluetooth, и подключает или отключает его.</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Bluetooth-аудио</value>
+  </data>
+  <data name="State_Connected" xml:space="preserve">
+    <value>Подключено</value>
+  </data>
+  <data name="State_Disconnected" xml:space="preserve">
+    <value>Отключено</value>
+  </data>
+  <data name="State_Connecting" xml:space="preserve">
+    <value>Подключение…</value>
+  </data>
+  <data name="State_Disconnecting" xml:space="preserve">
+    <value>Отключение…</value>
+  </data>
+  <data name="State_ConnectFailed" xml:space="preserve">
+    <value>Не подключилось</value>
+  </data>
+  <data name="State_ConnectFailedHint" xml:space="preserve">
+    <value>Возможно, устройство подключено к телефону или другому компьютеру.</value>
+  </data>
+  <data name="State_DisconnectFailed" xml:space="preserve">
+    <value>Не отключилось</value>
+  </data>
+  <data name="State_NotFound" xml:space="preserve">
+    <value>Нет среди спаренных аудиоустройств</value>
+  </data>
+  <data name="State_Unavailable" xml:space="preserve">
+    <value>Аудиоустройства недоступны</value>
+  </data>
+  <data name="Action_Connect" xml:space="preserve">
+    <value>Подключить</value>
+  </data>
+  <data name="Action_Disconnect" xml:space="preserve">
+    <value>Отключить</value>
+  </data>
+  <data name="Empty_Message" xml:space="preserve">
+    <value>Выберите Bluetooth-аудиоустройство в настройках.</value>
+  </data>
+  <data name="Settings_Device" xml:space="preserve">
+    <value>Устройство</value>
+  </data>
+  <data name="Settings_Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Settings_Searching" xml:space="preserve">
+    <value>Поиск спаренных аудиоустройств…</value>
+  </data>
+  <data name="Settings_NoDevices" xml:space="preserve">
+    <value>Спаренных Bluetooth-аудиоустройств нет. Сначала спарьте устройство в настройках Bluetooth Windows.</value>
+  </data>
+  <data name="Settings_DevicesHint" xml:space="preserve">
+    <value>В списке только спаренные аудиоустройства: наушники, гарнитуры, колонки.</value>
+  </data>
+  <data name="Settings_SearchFailed" xml:space="preserve">
+    <value>Не удалось получить список устройств: {0}</value>
+  </data>
+  <data name="Settings_NotFound" xml:space="preserve">
+    <value>сейчас не найдено</value>
+  </data>
+  <data name="Settings_Title" xml:space="preserve">
+    <value>Подпись</value>
+  </data>
+  <data name="Settings_TitleHint" xml:space="preserve">
+    <value>Пусто — имя устройства.</value>
+  </data>
+</root>

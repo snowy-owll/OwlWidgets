@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+    <data name="Name" xml:space="preserve">
+    <value>Монитор сети</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Текущая скорость загрузки и отдачи сетевого адаптера и графики за последнюю минуту.</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Отдача</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="Header_NoConnection" xml:space="preserve">
+    <value>Нет подключения к сети</value>
+  </data>
+  <data name="Header_NotConnected" xml:space="preserve">
+    <value>{0}: не подключён</value>
+  </data>
+  <data name="Settings_Adapter" xml:space="preserve">
+    <value>Сетевой адаптер</value>
+  </data>
+  <data name="Settings_AdapterAuto" xml:space="preserve">
+    <value>Автоматически</value>
+  </data>
+  <data name="Settings_AdapterNote" xml:space="preserve">
+    <value>Автоматически — адаптер, через который Windows сейчас отправляет трафик в интернет. Карточка сама переходит на него при переключении между Wi-Fi и кабелем. При VPN, через который идёт весь трафик, это адаптер VPN, так что ничего не считается дважды.</value>
+  </data>
+  <data name="Settings_AdapterNotConnected" xml:space="preserve">
+    <value>{0} (не подключён)</value>
+  </data>
+  <data name="Settings_Unit" xml:space="preserve">
+    <value>Единицы</value>
+  </data>
+  <data name="Settings_UnitBits" xml:space="preserve">
+    <value>Биты в секунду (Мбит/с)</value>
+  </data>
+  <data name="Settings_UnitBytes" xml:space="preserve">
+    <value>Байты в секунду (МБ/с)</value>
+  </data>
+  <data name="Unit_Bps" xml:space="preserve">
+    <value>бит/с</value>
+  </data>
+  <data name="Unit_Kbps" xml:space="preserve">
+    <value>Кбит/с</value>
+  </data>
+  <data name="Unit_Mbps" xml:space="preserve">
+    <value>Мбит/с</value>
+  </data>
+  <data name="Unit_Gbps" xml:space="preserve">
+    <value>Гбит/с</value>
+  </data>
+  <data name="Unit_BytesPerSecond" xml:space="preserve">
+    <value>Б/с</value>
+  </data>
+  <data name="Unit_KBPerSecond" xml:space="preserve">
+    <value>КБ/с</value>
+  </data>
+  <data name="Unit_MBPerSecond" xml:space="preserve">
+    <value>МБ/с</value>
+  </data>
+  <data name="Unit_GBPerSecond" xml:space="preserve">
+    <value>ГБ/с</value>
+  </data>
+</root>

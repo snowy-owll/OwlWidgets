@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Description" xml:space="preserve">
+    <value>Current weather and a forecast by day for a chosen place, from OpenWeatherMap or Open-Meteo.</value>
+    <comment>Widget type description in the manager</comment>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Weather</value>
+    <comment>Widget type name in the manager</comment>
+  </data>
+  <data name="Humidity" xml:space="preserve">
+    <value>Humidity</value>
+  </data>
+  <data name="WindSpeed" xml:space="preserve">
+    <value>Wind Speed</value>
+  </data>
+  <data name="Format_WindSpeed" xml:space="preserve">
+    <value>{0} m/s</value>
+    <comment>Wind speed in metres per second</comment>
+  </data>
+  <data name="Status_Loading" xml:space="preserve">
+    <value>Loading…</value>
+  </data>
+  <data name="Status_Updated" xml:space="preserve">
+    <value>Updated {0}</value>
+    <comment>{0}: time of the last update, with the date if not today</comment>
+  </data>
+  <data name="Status_Failed" xml:space="preserve">
+    <value>Update failed</value>
+  </data>
+  <data name="Status_FailedUpdated" xml:space="preserve">
+    <value>Update failed, data from {0}</value>
+    <comment>{0}: time of the last successful update, with the date if not today</comment>
+  </data>
+  <data name="Settings_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Settings_ApiKey" xml:space="preserve">
+    <value>OpenWeatherMap key</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language of the place name (empty: the application language)</value>
+    <comment>Language code of the place name in the search and on the card, for example en or ru</comment>
+  </data>
+  <data name="Settings_Interval" xml:space="preserve">
+    <value>Interval, ms</value>
+  </data>
+  <data name="Error_Interval" xml:space="preserve">
+    <value>The interval must be a positive number.</value>
+  </data>
+  <data name="Settings_ShowForecast" xml:space="preserve">
+    <value>Show the forecast by days</value>
+  </data>
+  <data name="Forecast_Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Forecast_Loading" xml:space="preserve">
+    <value>Loading the forecast…</value>
+  </data>
+  <data name="Forecast_Failed" xml:space="preserve">
+    <value>Forecast not loaded</value>
+  </data>
+  <data name="Pressure" xml:space="preserve">
+    <value>Pressure</value>
+  </data>
+  <data name="Format_PressureHpa" xml:space="preserve">
+    <value>{0} hPa</value>
+  </data>
+  <data name="Format_PressureMmHg" xml:space="preserve">
+    <value>{0} mmHg</value>
+  </data>
+  <data name="SunriseSunset" xml:space="preserve">
+    <value>Sunrise / sunset</value>
+  </data>
+  <data name="Format_FeelsLike" xml:space="preserve">
+    <value>Feels like {0}°</value>
+  </data>
+  <data name="Settings_Provider" xml:space="preserve">
+    <value>Weather data source</value>
+  </data>
+  <data name="Provider_OpenWeatherMap" xml:space="preserve">
+    <value>OpenWeatherMap (key needed)</value>
+  </data>
+  <data name="Provider_OpenMeteo" xml:space="preserve">
+    <value>Open-Meteo (no key)</value>
+  </data>
+  <data name="Attribution_OpenWeatherMap" xml:space="preserve">
+    <value>Weather data by OpenWeather, openweathermap.org (CC BY-SA 4.0)</value>
+  </data>
+  <data name="Attribution_OpenMeteo" xml:space="preserve">
+    <value>Weather data by Open-Meteo.com (CC BY 4.0)</value>
+  </data>
+  <data name="Attribution_OpenHint" xml:space="preserve">
+    <value>Click to open the website.</value>
+  </data>
+  <data name="Settings_PlaceSearch" xml:space="preserve">
+    <value>Find a place by name</value>
+  </data>
+  <data name="Place_None" xml:space="preserve">
+    <value>Not chosen</value>
+  </data>
+  <data name="Empty_NoPlace" xml:space="preserve">
+    <value>No place chosen. Find it in the settings.</value>
+  </data>
+  <data name="Empty_NoKey" xml:space="preserve">
+    <value>OpenWeatherMap needs a key. Enter it in the settings.</value>
+  </data>
+  <data name="Search_Searching" xml:space="preserve">
+    <value>Searching…</value>
+  </data>
+  <data name="Search_NothingFound" xml:space="preserve">
+    <value>Nothing found.</value>
+  </data>
+  <data name="Search_NeedsKey" xml:space="preserve">
+    <value>Enter the OpenWeatherMap key to search.</value>
+  </data>
+  <data name="Search_KeyRejected" xml:space="preserve">
+    <value>OpenWeatherMap did not accept the key.</value>
+  </data>
+  <data name="Search_Failed" xml:space="preserve">
+    <value>The search failed. Check the connection.</value>
+  </data>
+  <data name="Settings_Icons" xml:space="preserve">
+    <value>Weather icons</value>
+  </data>
+  <data name="Icons_BuiltIn" xml:space="preserve">
+    <value>Built-in (Noto Emoji)</value>
+  </data>
+  <data name="Icons_Pack" xml:space="preserve">
+    <value>{0} · {1} of {2} icons</value>
+  </data>
+  <data name="Icons_ImportZip" xml:space="preserve">
+    <value>From zip…</value>
+  </data>
+  <data name="Icons_ImportFolder" xml:space="preserve">
+    <value>From folder…</value>
+  </data>
+  <data name="Icons_UseBuiltIn" xml:space="preserve">
+    <value>Built-in</value>
+  </data>
+  <data name="Icons_Hint" xml:space="preserve">
+    <value>PNG files named by the icon code, such as 10d.png or 10d@2x.png, as on openweathermap.org. The icons are copied; missing ones are taken from the built-in set.</value>
+  </data>
+  <data name="Icons_Importing" xml:space="preserve">
+    <value>Importing…</value>
+  </data>
+  <data name="Icons_Imported" xml:space="preserve">
+    <value>Imported {0} of {1} icons.</value>
+  </data>
+  <data name="Icons_Missing" xml:space="preserve">
+    <value>Not found: {0}. The built-in icons are used for them.</value>
+  </data>
+  <data name="Icons_Rejected" xml:space="preserve">
+    <value>Skipped as not an image or too large: {0}.</value>
+  </data>
+  <data name="Icons_NoneFound" xml:space="preserve">
+    <value>No icons found. Expected PNG files such as 01d.png or 01d@2x.png.</value>
+  </data>
+  <data name="Icons_Failed" xml:space="preserve">
+    <value>The icons were not imported.</value>
+  </data>
+  <data name="Icons_BadArchive" xml:space="preserve">
+    <value>The file is not a zip archive or is damaged.</value>
+  </data>
+  <data name="Icons_SourceMissing" xml:space="preserve">
+    <value>The file or folder was not found.</value>
+  </data>
+  <data name="Icons_NoAccess" xml:space="preserve">
+    <value>No access to the file or folder.</value>
+  </data>
+  <data name="Icons_ReadWriteFailed" xml:space="preserve">
+    <value>The icons could not be read or saved. The file may be in use by another program, or the disk may be full.</value>
+  </data>
+  <data name="Icons_ZipFilter" xml:space="preserve">
+    <value>Zip archives (*.zip)|*.zip</value>
+  </data>
+</root>

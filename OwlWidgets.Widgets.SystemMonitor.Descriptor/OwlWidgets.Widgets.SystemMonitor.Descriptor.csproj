@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <RootNamespace>OwlWidgets.Widgets.SystemMonitor</RootNamespace>
+    <WidgetFolder>SystemMonitor</WidgetFolder>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+    <!-- CornerPicker of the button corner on the settings screen. -->
+    <ProjectReference Include="..\OwlWidgets.UI.Common\OwlWidgets.UI.Common.csproj" />
+  </ItemGroup>
+
+  <!-- Strings of the whole widget: the settings screen here and the runtime view, which references this assembly. -->
+  <ItemGroup>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- Icon of the widget type in the manager: drawn for this project, CC0. -->
+  <ItemGroup>
+    <Resource Include="Assets\Icon.png" />
+  </ItemGroup>
+
+  <Import Project="..\WidgetPackage.targets" />
+
+</Project>

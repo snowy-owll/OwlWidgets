@@ -1,0 +1,138 @@
+<UserControl
+    x:Class="OwlWidgets.Widgets.BluetoothAudio.Content"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:OwlWidgets.Widgets.BluetoothAudio.Properties;assembly=OwlWidgets.Widgets.BluetoothAudio.Descriptor"
+    xmlns:ui="clr-namespace:OwlWidgets.UI.Common;assembly=OwlWidgets.UI.Common"
+    xmlns:vms="clr-namespace:OwlWidgets.Widgets.BluetoothAudio.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vms:ContentViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <!--  The view does not take the Material Design theme: the button is drawn like the card.  -->
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OwlWidgets.UI.Common;component/Themes/Card.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="SecondaryBrush" Color="#9ca3af" />
+            <SolidColorBrush x:Key="AccentBrush" Color="#1E88E5" />
+
+            <!--  Connected: the accent circle; connecting or disconnecting: the accent circle, pulsing.  -->
+            <Style x:Key="DeviceCircleStyle" TargetType="Border">
+                <Setter Property="Background" Value="#33FFFFFF" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsConnected}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsBusy}" Value="True">
+                        <Setter Property="Background" Value="{StaticResource AccentBrush}" />
+                        <DataTrigger.EnterActions>
+                            <BeginStoryboard x:Name="Pulse">
+                                <Storyboard>
+                                    <DoubleAnimation
+                                        AutoReverse="True"
+                                        RepeatBehavior="Forever"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="1"
+                                        To="0.35"
+                                        Duration="0:0:0.7" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </DataTrigger.EnterActions>
+                        <DataTrigger.ExitActions>
+                            <StopStoryboard BeginStoryboardName="Pulse" />
+                        </DataTrigger.ExitActions>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <Style x:Key="StatusStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
+                <!--  One line: a long status would make the card taller; the rest is in the tooltip.  -->
+                <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsConnected}" Value="True">
+                        <Setter Property="Foreground" Value="#90CAF9" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding IsFailed}" Value="True">
+                        <Setter Property="Foreground" Value="#f87171" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border
+        Width="320"
+        Padding="15,12"
+        Style="{StaticResource CardStyle}">
+        <Grid>
+            <!--  No device chosen: a hint and the way to the settings.  -->
+            <ui:SettingsPrompt Command="{Binding OpenSettingsCommand}" Message="{x:Static p:Strings.Empty_Message}">
+                <ui:SettingsPrompt.Style>
+                    <Style TargetType="ui:SettingsPrompt">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ui:SettingsPrompt.Style>
+            </ui:SettingsPrompt>
+
+            <DockPanel>
+                <DockPanel.Style>
+                    <Style TargetType="DockPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DockPanel.Style>
+                <Border
+                    Width="40"
+                    Height="40"
+                    VerticalAlignment="Center"
+                    CornerRadius="20"
+                    DockPanel.Dock="Left"
+                    Style="{StaticResource DeviceCircleStyle}">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontFamily="Segoe MDL2 Assets"
+                        FontSize="18"
+                        Foreground="White"
+                        Text="&#xE7F6;" />
+                </Border>
+                <Button
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Command="{Binding ToggleCommand}"
+                    Content="{Binding ActionText}"
+                    DockPanel.Dock="Right"
+                    IsEnabled="{Binding CanToggle}"
+                    Style="{StaticResource CardButtonStyle}" />
+                <StackPanel Margin="10,0,0,0" VerticalAlignment="Center">
+                    <!--  Up to two lines: names like "soundcore Space Q45" do not fit next to the button.  -->
+                    <TextBlock
+                        MaxHeight="44"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="{Binding Title}"
+                        TextTrimming="CharacterEllipsis"
+                        TextWrapping="Wrap" />
+                    <TextBlock
+                        Style="{StaticResource StatusStyle}"
+                        Text="{Binding Status}"
+                        ToolTip="{Binding StatusHint}" />
+                </StackPanel>
+            </DockPanel>
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,202 @@
+<UserControl
+    x:Class="OwlWidgets.Widgets.CurrencyRates.Content"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:OwlWidgets.Widgets.CurrencyRates.Properties;assembly=OwlWidgets.Widgets.CurrencyRates.Descriptor"
+    xmlns:ui="clr-namespace:OwlWidgets.UI.Common;assembly=OwlWidgets.UI.Common"
+    xmlns:vms="clr-namespace:OwlWidgets.Widgets.CurrencyRates.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vms:ContentViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OwlWidgets.UI.Common;component/Themes/Card.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="SecondaryBrush" Color="#9ca3af" />
+
+            <Style x:Key="ChangeStyle" TargetType="TextBlock">
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
+                <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Direction}" Value="1">
+                        <Setter Property="Foreground" Value="#4ade80" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Direction}" Value="-1">
+                        <Setter Property="Foreground" Value="#f87171" />
+                    </DataTrigger>
+                    <DataTrigger Binding="{Binding Change}" Value="{x:Null}">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+
+            <!--  Flag of the base currency with its symbol in a badge; without a flag, the symbol in a circle.  -->
+            <DataTemplate x:Key="CurrencyIcon" DataType="{x:Type vms:RateViewModel}">
+                <Grid Width="42" Height="40">
+                    <Image
+                        x:Name="Flag"
+                        Width="36"
+                        Height="36"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        RenderOptions.BitmapScalingMode="HighQuality"
+                        Source="{Binding Flag}">
+                        <Image.Clip>
+                            <EllipseGeometry
+                                Center="18,18"
+                                RadiusX="18"
+                                RadiusY="18" />
+                        </Image.Clip>
+                    </Image>
+                    <Border
+                        x:Name="Badge"
+                        Width="20"
+                        Height="20"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Bottom"
+                        Background="#E6262626"
+                        BorderBrush="#7F000000"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <Viewbox Margin="3" StretchDirection="DownOnly">
+                            <TextBlock
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Text="{Binding Symbol}" />
+                        </Viewbox>
+                    </Border>
+                    <Border
+                        x:Name="SymbolCircle"
+                        Width="36"
+                        Height="36"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#33FFFFFF"
+                        CornerRadius="18"
+                        Visibility="Collapsed">
+                        <Viewbox Margin="7" StretchDirection="DownOnly">
+                            <TextBlock
+                                FontSize="18"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Text="{Binding Symbol}" />
+                        </Viewbox>
+                    </Border>
+                </Grid>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding HasFlag}" Value="False">
+                        <Setter TargetName="Flag" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="Badge" Property="Visibility" Value="Collapsed" />
+                        <Setter TargetName="SymbolCircle" Property="Visibility" Value="Visible" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border
+        Width="300"
+        Padding="15,10"
+        Style="{StaticResource CardStyle}">
+        <Grid>
+            <!--  No pairs: a short card with a hint and the way to the settings.  -->
+            <ui:SettingsPrompt Command="{Binding OpenSettingsCommand}" Message="{x:Static p:Strings.Empty_Message}">
+                <ui:SettingsPrompt.Style>
+                    <Style TargetType="ui:SettingsPrompt">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ui:SettingsPrompt.Style>
+            </ui:SettingsPrompt>
+
+            <StackPanel>
+                <StackPanel.Style>
+                    <Style TargetType="StackPanel">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsEmpty}" Value="True">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Style>
+                <ItemsControl ItemsSource="{Binding Rates}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vms:RateViewModel}">
+                            <DockPanel Margin="0,5">
+                                <ContentPresenter
+                                    VerticalAlignment="Center"
+                                    Content="{Binding}"
+                                    ContentTemplate="{StaticResource CurrencyIcon}"
+                                    DockPanel.Dock="Left" />
+                                <StackPanel
+                                    Margin="10,0,0,0"
+                                    VerticalAlignment="Center"
+                                    DockPanel.Dock="Right">
+                                    <TextBlock
+                                        HorizontalAlignment="Right"
+                                        FontSize="16"
+                                        FontWeight="Bold"
+                                        Foreground="White"
+                                        Text="{Binding Value}" />
+                                    <TextBlock Style="{StaticResource ChangeStyle}" Text="{Binding Change}" />
+                                </StackPanel>
+                                <StackPanel Margin="8,0,0,0" VerticalAlignment="Center">
+                                    <TextBlock TextTrimming="CharacterEllipsis">
+                                        <Run
+                                            FontSize="16"
+                                            FontWeight="Bold"
+                                            Foreground="White"
+                                            Text="{Binding Title, Mode=OneWay}" />
+                                        <Run
+                                            FontSize="13"
+                                            Foreground="{StaticResource SecondaryBrush}"
+                                            Text="{Binding QuoteCode, Mode=OneWay, StringFormat={}/ {0}}" />
+                                    </TextBlock>
+                                    <TextBlock
+                                        FontSize="12"
+                                        Foreground="{StaticResource SecondaryBrush}"
+                                        Text="{Binding Name}"
+                                        TextTrimming="CharacterEllipsis" />
+                                </StackPanel>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <DockPanel Margin="0,4,0,0" HorizontalAlignment="Right">
+                    <!--  The request failed: try again now instead of in two minutes  -->
+                    <Button
+                        Margin="4,0,-4,0"
+                        VerticalAlignment="Center"
+                        Command="{Binding RefreshCommand}"
+                        DockPanel.Dock="Right">
+                        <Button.Style>
+                            <Style BasedOn="{StaticResource CardRefreshButtonStyle}" TargetType="Button">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Failed}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <TextBlock
+                        VerticalAlignment="Center"
+                        FontSize="11"
+                        Foreground="{StaticResource SecondaryBrush}"
+                        Text="{Binding Status}"
+                        TextAlignment="Right"
+                        TextWrapping="Wrap" />
+                </DockPanel>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

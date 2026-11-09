@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Update="Properties\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="8.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OwlWidgets.Common\OwlWidgets.Common.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Contracts\OwlWidgets.Contracts.csproj" />
+    <ProjectReference Include="..\OwlWidgets.Protocol\OwlWidgets.Protocol.csproj" />
+    <ProjectReference Include="..\OwlWidgets.UI.Common\OwlWidgets.UI.Common.csproj" />
+  </ItemGroup>
+
+  <Target Name="CopyHostBesideManager" AfterTargets="Build">
+    <PropertyGroup>
+      <ManagerDir>$(MSBuildThisFileDirectory)..\OwlWidgets\bin\$(Configuration)\net8.0-windows\</ManagerDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <HostFile Include="$(TargetDir)OwlWidgets.WidgetHost.exe" />
+      <HostFile Include="$(TargetDir)OwlWidgets.WidgetHost.dll" />
+      <HostFile Include="$(TargetDir)OwlWidgets.WidgetHost.deps.json" />
+      <HostFile Include="$(TargetDir)OwlWidgets.WidgetHost.runtimeconfig.json" />
+      <HostFile Include="$(TargetDir)OwlWidgets.WidgetHost.pdb" />
+      <HostFile Include="$(TargetDir)OwlWidgets.Contracts.dll" />
+      <HostFile Include="$(TargetDir)OwlWidgets.Contracts.pdb" />
+      <HostFile Include="$(TargetDir)OwlWidgets.Protocol.dll" />
+      <HostFile Include="$(TargetDir)OwlWidgets.Protocol.pdb" />
+      <!-- Wrapper translations go to the same culture folders as the manager ones. -->
+      <HostSatellite Include="$(TargetDir)**\OwlWidgets.WidgetHost.resources.dll" />
+    </ItemGroup>
+    <MakeDir Directories="$(ManagerDir)" />
+    <Copy SourceFiles="@(HostFile)" DestinationFolder="$(ManagerDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(HostSatellite)"
+          DestinationFiles="@(HostSatellite->'$(ManagerDir)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+  </Target>
+
+</Project>

@@ -1,0 +1,35 @@
+<Project>
+  <!--
+    Копирует выход виджета в каталог поставки менеджера: Widgets/{WidgetFolder}.
+    OwlWidgets.Contracts, OwlWidgets.Common и OwlWidgets.UI.Common рядом с виджетом не кладутся:
+    дескриптор получает их от менеджера, runtime — от обёртки, оба из своего каталога.
+  -->
+  <Target Name="StageWidgetPackage" AfterTargets="Build" Condition="'$(WidgetFolder)' != ''">
+    <PropertyGroup>
+      <_PackageDir>$(MSBuildThisFileDirectory)OwlWidgets\bin\$(Configuration)\net8.0-windows\Widgets\$(WidgetFolder)\</_PackageDir>
+    </PropertyGroup>
+    <ItemGroup>
+      <_Managed Include="$(TargetDir)*.dll"
+                Exclude="$(TargetDir)OwlWidgets.Contracts.dll;$(TargetDir)OwlWidgets.Common.dll;$(TargetDir)OwlWidgets.UI.Common.dll;$(TargetDir)OwlWidgets.Protocol.dll" />
+      <_Managed Include="$(TargetDir)*.deps.json" />
+      <_Managed Include="$(TargetDir)*.pdb"
+                Exclude="$(TargetDir)OwlWidgets.Contracts.pdb;$(TargetDir)OwlWidgets.Common.pdb;$(TargetDir)OwlWidgets.UI.Common.pdb;$(TargetDir)OwlWidgets.Protocol.pdb" />
+      <!-- Translations: {culture}/*.resources.dll. publish\ is the output of dotnet publish of the widget itself. -->
+      <_Satellites Include="$(TargetDir)**\*.resources.dll"
+                   Exclude="$(TargetDir)runtimes\**;$(TargetDir)publish\**;$(TargetDir)**\OwlWidgets.UI.Common.resources.dll" />
+      <_Assets Include="$(TargetDir)Assets\**\*.*" />
+      <_Runtimes Include="$(TargetDir)runtimes\**\*.*" />
+    </ItemGroup>
+    <MakeDir Directories="$(_PackageDir)" />
+    <Copy SourceFiles="@(_Managed)" DestinationFolder="$(_PackageDir)" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Satellites)"
+          DestinationFiles="@(_Satellites->'$(_PackageDir)%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Assets)"
+          DestinationFiles="@(_Assets->'$(_PackageDir)Assets\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+    <Copy SourceFiles="@(_Runtimes)"
+          DestinationFiles="@(_Runtimes->'$(_PackageDir)runtimes\%(RecursiveDir)%(Filename)%(Extension)')"
+          SkipUnchangedFiles="true" />
+  </Target>
+</Project>

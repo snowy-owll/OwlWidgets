@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Name" xml:space="preserve">
+    <value>Скорость интернета</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Пинг и скорость загрузки и отдачи интернет-соединения по серверам Cloudflare или M-Lab.</value>
+  </data>
+  <data name="Provider_Cloudflare" xml:space="preserve">
+    <value>Cloudflare</value>
+  </data>
+  <data name="Provider_MLab" xml:space="preserve">
+    <value>M-Lab (NDT7)</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>СТАРТ</value>
+  </data>
+  <data name="Start_ToolTip" xml:space="preserve">
+    <value>Измерить скорость</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Стоп</value>
+  </data>
+  <data name="Ping" xml:space="preserve">
+    <value>Пинг</value>
+  </data>
+  <data name="Jitter" xml:space="preserve">
+    <value>Джиттер {0}</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Отдача</value>
+  </data>
+  <data name="Unit_Mbps" xml:space="preserve">
+    <value>Мбит/с</value>
+  </data>
+  <data name="Unit_Ms" xml:space="preserve">
+    <value>мс</value>
+  </data>
+  <data name="Phase_Connecting" xml:space="preserve">
+    <value>Поиск сервера…</value>
+  </data>
+  <data name="Phase_Latency" xml:space="preserve">
+    <value>Замер пинга…</value>
+  </data>
+  <data name="Phase_Download" xml:space="preserve">
+    <value>Загрузка</value>
+  </data>
+  <data name="Phase_Upload" xml:space="preserve">
+    <value>Отдача</value>
+  </data>
+  <data name="Status_Never" xml:space="preserve">
+    <value>Замеров ещё не было</value>
+  </data>
+  <data name="Status_Last" xml:space="preserve">
+    <value>Замер {0}</value>
+  </data>
+  <data name="Status_Failed" xml:space="preserve">
+    <value>Замер не удался</value>
+  </data>
+  <data name="Status_FailedLast" xml:space="preserve">
+    <value>Замер не удался. Последний — {0}</value>
+  </data>
+  <data name="Status_Stopped" xml:space="preserve">
+    <value>Замер остановлен</value>
+  </data>
+  <data name="Status_StoppedLast" xml:space="preserve">
+    <value>Замер остановлен. Последний — {0}</value>
+  </data>
+  <data name="Settings_Provider" xml:space="preserve">
+    <value>Серверы</value>
+  </data>
+  <data name="Settings_ProviderNote_Cloudflare" xml:space="preserve">
+    <value>speed.cloudflare.com, ближайший центр обработки данных Cloudflare. Несколько соединений сразу, как у Speedtest.</value>
+  </data>
+  <data name="Settings_ProviderNote_MLab" xml:space="preserve">
+    <value>Measurement Lab, ближайший сервер сети NDT7. Одно соединение, до 10 секунд в каждую сторону. M-Lab публикует каждый замер вместе с IP-адресом в открытых данных.</value>
+  </data>
+  <data name="Settings_Streams" xml:space="preserve">
+    <value>Соединений сразу, {0}–{1}</value>
+  </data>
+  <data name="Settings_Duration" xml:space="preserve">
+    <value>Длительность в каждую сторону, секунды, {0}–{1}</value>
+  </data>
+  <data name="Settings_AutoInterval" xml:space="preserve">
+    <value>Измерять автоматически каждые … минут, не меньше {0}; 0 — только по кнопке</value>
+  </data>
+  <data name="Settings_TrafficNote" xml:space="preserve">
+    <value>Замер на быстром соединении тратит сотни мегабайт трафика. На лимитном подключении автоматические замеры лучше не включать.</value>
+  </data>
+  <data name="Settings_ButtonCorner" xml:space="preserve">
+    <value>Кнопки на карточке</value>
+  </data>
+  <data name="Settings_ButtonsAtAnchor" xml:space="preserve">
+    <value>В углу точки отсчёта виджета</value>
+  </data>
+  <data name="Collapse" xml:space="preserve">
+    <value>Свернуть</value>
+  </data>
+  <data name="Expand" xml:space="preserve">
+    <value>Развернуть</value>
+  </data>
+  <data name="Move" xml:space="preserve">
+    <value>Переместить</value>
+  </data>
+  <data name="Collapsed_Result" xml:space="preserve">
+    <value>Пинг {0} мс · ↓ {1} · ↑ {2} Мбит/с</value>
+  </data>
+  <data name="Error_Streams" xml:space="preserve">
+    <value>Соединения: целое число от {0} до {1}.</value>
+  </data>
+  <data name="Error_Duration" xml:space="preserve">
+    <value>Длительность: целое число секунд от {0} до {1}.</value>
+  </data>
+  <data name="Error_AutoInterval" xml:space="preserve">
+    <value>Интервал: 0 или целое число минут, не меньше {0}.</value>
+  </data>
+</root>

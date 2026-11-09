@@ -1,0 +1,143 @@
+<UserControl
+    x:Class="OwlWidgets.Widgets.NetworkMonitor.Content"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:OwlWidgets.Widgets.NetworkMonitor"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:p="clr-namespace:OwlWidgets.Widgets.NetworkMonitor.Properties;assembly=OwlWidgets.Widgets.NetworkMonitor.Descriptor"
+    xmlns:vms="clr-namespace:OwlWidgets.Widgets.NetworkMonitor.ViewModels"
+    d:DataContext="{d:DesignInstance Type=vms:ContentViewModel,
+                                     IsDesignTimeCreatable=True}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/OwlWidgets.UI.Common;component/Themes/Card.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <SolidColorBrush x:Key="SecondaryBrush" Color="#9ca3af" />
+            <!--  The colours of the two directions, as on Internet Speed: cyan for the download, violet for the upload.  -->
+            <SolidColorBrush x:Key="DownloadBrush" Color="#22d3ee" />
+            <SolidColorBrush x:Key="UploadBrush" Color="#a78bfa" />
+
+            <!--  The small button in the top corner that moves the card, as on Internet Speed.  -->
+            <Style x:Key="CornerButtonStyle" TargetType="Button">
+                <Setter Property="Foreground" Value="{StaticResource SecondaryBrush}" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Focusable" Value="False" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                x:Name="Chrome"
+                                Width="24"
+                                Height="24"
+                                Background="Transparent"
+                                CornerRadius="12">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Foreground" Value="White" />
+                                    <Setter TargetName="Chrome" Property="Background" Value="#26FFFFFF" />
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="Chrome" Property="Background" Value="#40FFFFFF" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <!--  One direction: the caption with its arrow and the current speed, the graph of the last minute under them.  -->
+            <DataTemplate x:Key="DirectionTemplate" DataType="{x:Type vms:TrafficDirection}">
+                <StackPanel Margin="0,8,0,0">
+                    <Grid>
+                        <TextBlock
+                            VerticalAlignment="Bottom"
+                            FontSize="12"
+                            Foreground="{StaticResource SecondaryBrush}">
+                            <Run x:Name="Arrow" Foreground="{StaticResource DownloadBrush}" Text="↓" />
+                            <Run x:Name="Caption" Text="{x:Static p:Strings.Download}" />
+                        </TextBlock>
+                        <TextBlock
+                            HorizontalAlignment="Right"
+                            FontSize="18"
+                            FontWeight="Bold"
+                            Foreground="White"
+                            Text="{Binding Speed}" />
+                    </Grid>
+                    <Grid Height="52" Margin="0,4,0,0">
+                        <local:TrafficGraph
+                            x:Name="Graph"
+                            Capacity="{x:Static vms:TrafficDirection.HistoryLength}"
+                            Maximum="{Binding Top}"
+                            Stroke="{StaticResource DownloadBrush}"
+                            Values="{Binding History}" />
+                        <!--  The speed at the top of the graph; the grid line in the middle is half of it.  -->
+                        <TextBlock
+                            Margin="6,3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            FontSize="10"
+                            Foreground="{StaticResource SecondaryBrush}"
+                            Text="{Binding TopText}" />
+                    </Grid>
+                </StackPanel>
+                <DataTemplate.Triggers>
+                    <DataTrigger Binding="{Binding IsUpload}" Value="True">
+                        <Setter TargetName="Arrow" Property="Text" Value="↑" />
+                        <Setter TargetName="Arrow" Property="Foreground" Value="{StaticResource UploadBrush}" />
+                        <Setter TargetName="Caption" Property="Text" Value="{x:Static p:Strings.Upload}" />
+                        <Setter TargetName="Graph" Property="Stroke" Value="{StaticResource UploadBrush}" />
+                    </DataTrigger>
+                </DataTemplate.Triggers>
+            </DataTemplate>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border
+        Width="280"
+        Padding="14,8,10,12"
+        Style="{StaticResource CardStyle}">
+        <StackPanel>
+            <DockPanel>
+                <Button
+                    Command="{Binding MoveCommand}"
+                    DockPanel.Dock="Right"
+                    Style="{StaticResource CornerButtonStyle}"
+                    ToolTip="{x:Static p:Strings.Move}">
+                    <!--  Drawn, not the "Move" glyph: Segoe MDL2 Assets of Windows 10 has no E7C2.  -->
+                    <Path
+                        Width="11"
+                        Height="11"
+                        Data="M6,0.5 V11.5 M0.5,6 H11.5 M4,2.5 L6,0.5 L8,2.5 M4,9.5 L6,11.5 L8,9.5 M2.5,4 L0.5,6 L2.5,8 M9.5,4 L11.5,6 L9.5,8"
+                        Stretch="Uniform"
+                        Stroke="{Binding (TextElement.Foreground), RelativeSource={RelativeSource Self}}"
+                        StrokeEndLineCap="Round"
+                        StrokeLineJoin="Round"
+                        StrokeStartLineCap="Round"
+                        StrokeThickness="1" />
+                </Button>
+                <TextBlock
+                    VerticalAlignment="Center"
+                    FontSize="12"
+                    Foreground="{StaticResource SecondaryBrush}"
+                    Text="{Binding Header}"
+                    TextTrimming="CharacterEllipsis"
+                    ToolTip="{Binding HeaderToolTip}" />
+            </DockPanel>
+            <ContentControl
+                Margin="0,0,4,0"
+                Content="{Binding Download}"
+                ContentTemplate="{StaticResource DirectionTemplate}"
+                Focusable="False" />
+            <ContentControl
+                Margin="0,0,4,0"
+                Content="{Binding Upload}"
+                ContentTemplate="{StaticResource DirectionTemplate}"
+                Focusable="False" />
+        </StackPanel>
+    </Border>
+</UserControl>

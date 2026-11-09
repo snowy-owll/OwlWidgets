@@ -1,0 +1,248 @@
+<UserControl x:Class="OwlWidgets.Views.LogView" x:ClassModifier="internal"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:p="clr-namespace:OwlWidgets.Properties"
+             xmlns:contracts="clr-namespace:OwlWidgets.Contracts;assembly=OwlWidgets.Contracts"
+             xmlns:views="clr-namespace:OwlWidgets.Views"
+             views:LogTheme.IsDark="{Binding IsDarkTheme}">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="LogLevels.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <!-- A filter chip in the colour of its level (Tag): filled with a faint shade and outlined while on,
+                 plain while off. Its own template: the Material Design chip paints the checked state itself. -->
+            <Style x:Key="LevelFilter" TargetType="CheckBox">
+                <Setter Property="Margin" Value="0,0,8,0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="{DynamicResource MaterialDesign.Brush.Chip.OutlineBorder}" />
+                <Setter Property="Foreground" Value="{DynamicResource MaterialDesign.Brush.Foreground}" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="CheckBox">
+                            <Border x:Name="Chip" Height="32" CornerRadius="8" BorderThickness="1" Padding="8,0,12,0"
+                                    Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                    <materialDesign:PackIcon x:Name="Check" Kind="Check" Width="18" Height="18"
+                                                             VerticalAlignment="Center" Margin="0,0,6,0" />
+                                    <ContentPresenter x:Name="Label" VerticalAlignment="Center" Margin="4,0,0,0" />
+                                </StackPanel>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="False">
+                                    <Setter TargetName="Check" Property="Visibility" Value="Collapsed" />
+                                    <Setter TargetName="Label" Property="Opacity" Value="0.68" />
+                                </Trigger>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="Label" Property="Margin" Value="0" />
+                                </Trigger>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="Chip" Property="Opacity" Value="0.85" />
+                                </Trigger>
+                                <Trigger Property="IsKeyboardFocused" Value="True">
+                                    <Setter TargetName="Chip" Property="BorderThickness" Value="2" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Style.Triggers>
+                    <Trigger Property="IsChecked" Value="True">
+                        <Setter Property="Foreground">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource LogLevelBrushConverter}">
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="(views:LogTheme.IsDark)" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="BorderBrush">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource LogLevelBrushConverter}">
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="(views:LogTheme.IsDark)" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                        <Setter Property="Background">
+                            <Setter.Value>
+                                <MultiBinding Converter="{StaticResource LogLevelBrushConverter}" ConverterParameter="Fill">
+                                    <Binding Path="Tag" RelativeSource="{RelativeSource Self}" />
+                                    <Binding Path="(views:LogTheme.IsDark)" RelativeSource="{RelativeSource Self}" />
+                                </MultiBinding>
+                            </Setter.Value>
+                        </Setter>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.Row="0">
+            <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignIconButton}" Width="36" Height="36"
+                    VerticalAlignment="Center" ToolTip="{x:Static p:Strings.Log_OpenFolder}" Command="{Binding OpenFolderCommand}">
+                <materialDesign:PackIcon Kind="FolderOpenOutline" Width="20" Height="20" />
+            </Button>
+            <Button DockPanel.Dock="Right" Style="{StaticResource MaterialDesignIconButton}" Width="36" Height="36"
+                    VerticalAlignment="Center" ToolTip="{x:Static p:Strings.Log_Clear}" Command="{Binding ClearCommand}">
+                <materialDesign:PackIcon Kind="NotificationClearAll" Width="20" Height="20" />
+            </Button>
+            <ComboBox DockPanel.Dock="Left" Width="240" Margin="0,0,12,0" VerticalAlignment="Center"
+                      Style="{StaticResource MaterialDesignOutlinedComboBox}"
+                      materialDesign:HintAssist.Hint="{x:Static p:Strings.Log_Picker}"
+                      ItemsSource="{Binding Sources}"
+                      SelectedItem="{Binding SelectedSource}"
+                      DisplayMemberPath="Title" />
+            <TextBox Margin="0,0,12,0" VerticalAlignment="Center"
+                     Style="{StaticResource MaterialDesignOutlinedTextBox}"
+                     materialDesign:HintAssist.Hint="{x:Static p:Strings.Log_Search}"
+                     materialDesign:TextFieldAssist.HasClearButton="True"
+                     materialDesign:TextFieldAssist.LeadingIcon="Magnify"
+                     materialDesign:TextFieldAssist.HasLeadingIcon="True"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Delay=250}" />
+        </DockPanel>
+
+        <WrapPanel Grid.Row="1" Margin="0,12,0,0">
+            <!-- The errors chip also covers critical records; it takes the colour of errors. -->
+            <CheckBox Style="{StaticResource LevelFilter}" Tag="{x:Static contracts:WidgetLogLevel.Error}"
+                      Content="{x:Static p:Strings.Log_Errors}" IsChecked="{Binding ShowErrors}" />
+            <CheckBox Style="{StaticResource LevelFilter}" Tag="{x:Static contracts:WidgetLogLevel.Warning}"
+                      Content="{x:Static p:Strings.Log_Warnings}" IsChecked="{Binding ShowWarnings}" />
+            <CheckBox Style="{StaticResource LevelFilter}" Tag="{x:Static contracts:WidgetLogLevel.Information}"
+                      Content="{x:Static p:Strings.Log_Information}" IsChecked="{Binding ShowInformation}" />
+            <CheckBox Style="{StaticResource LevelFilter}" Tag="{x:Static contracts:WidgetLogLevel.Debug}"
+                      Content="{x:Static p:Strings.Log_Debug}" IsChecked="{Binding ShowDebug}"
+                      Visibility="{Binding ShowsDebugFilter, Converter={StaticResource BooleanToVisibilityConverter}}" />
+        </WrapPanel>
+
+        <TextBlock Grid.Row="2" Margin="0,8,0,8" Text="{x:Static p:Strings.Log_SessionOnly}" TextWrapping="Wrap"
+                   Style="{StaticResource MaterialDesignBody2TextBlock}" Opacity="0.68" />
+
+        <!-- Ctrl+C copies the selected lines: time, level, instance, source and the message with its exception.
+             Rows are not resizable: the grip at the bottom of a row let the user stretch it.
+             Rows are recycled: creating a row with its cells for every line scrolled into view made scrolling lag.
+             Columns are not virtualized, so a recycled row has all its cells and no horizontal offset of its own.
+             The row header width is fixed at zero: the headers are hidden, but a recycled row could still measure its
+             own and stand shifted right by it, widening the list so that a horizontal scroll bar showed up.
+             Scrolling goes by rows: by pixels the panel only estimates the height of the rows out of view,
+             and dragging the scroll bar made the list jerk while the estimate was corrected. -->
+        <DataGrid x:Name="Lines" Grid.Row="3"
+                  ItemsSource="{Binding Entries}"
+                  AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  CanUserReorderColumns="False" CanUserSortColumns="False" CanUserResizeRows="False"
+                  SelectionMode="Extended" SelectionUnit="FullRow" HeadersVisibility="Column" RowHeaderWidth="0"
+                  ClipboardCopyMode="ExcludeHeader" GridLinesVisibility="None"
+                  EnableRowVirtualization="True" EnableColumnVirtualization="False" VirtualizingPanel.IsVirtualizing="True"
+                  VirtualizingPanel.VirtualizationMode="Recycling" VirtualizingPanel.ScrollUnit="Item"
+                  RowDetailsVisibilityMode="VisibleWhenSelected"
+                  materialDesign:DataGridAssist.CellPadding="8,3"
+                  materialDesign:DataGridAssist.ColumnHeaderPadding="8,6"
+                  ScrollViewer.ScrollChanged="Lines_ScrollChanged">
+            <!-- Tooltips of the cells wrap long text. A shared style rather than a tooltip element in the cell
+                 template: that element would be created for every row, shown or not. -->
+            <DataGrid.Resources>
+                <Style TargetType="ToolTip" BasedOn="{StaticResource {x:Type ToolTip}}">
+                    <Setter Property="ContentTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding}" TextWrapping="Wrap" MaxWidth="640" />
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.Resources>
+            <!-- Double click or Enter opens the record in a dialog. -->
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding ShowDetailsCommand}"
+                              CommandParameter="{Binding SelectedItem, ElementName=Lines}" />
+                <KeyBinding Key="Enter" Command="{Binding ShowDetailsCommand}"
+                            CommandParameter="{Binding SelectedItem, ElementName=Lines}" />
+            </DataGrid.InputBindings>
+            <!-- Warnings and errors get a faint background of their level colour; hover and selection still show over it. -->
+            <DataGrid.RowStyle>
+                <Style TargetType="DataGridRow" BasedOn="{StaticResource {x:Type DataGridRow}}">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <MultiBinding Converter="{StaticResource LogLevelBrushConverter}" ConverterParameter="Tint">
+                                <Binding Path="Level" />
+                                <Binding Path="(views:LogTheme.IsDark)" RelativeSource="{RelativeSource Self}" />
+                            </MultiBinding>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </DataGrid.RowStyle>
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="{x:Static p:Strings.Log_ColumnLevel}" Width="Auto" ClipboardContentBinding="{Binding LevelText}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ContentPresenter Content="{Binding}" ContentTemplate="{StaticResource LogLevelBadge}" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="{x:Static p:Strings.Log_ColumnTime}" Width="Auto" ClipboardContentBinding="{Binding FullTime}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Time}" ToolTip="{Binding FullTime}" FontFamily="Consolas" VerticalAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="{x:Static p:Strings.Log_ColumnOrigin}" Width="140" Binding="{Binding Origin}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                            <Setter Property="ToolTip" Value="{Binding Origin}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="{x:Static p:Strings.Log_ColumnSource}" Width="180" Binding="{Binding Source}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+                            <Setter Property="ToolTip" Value="{Binding Source}" />
+                            <Setter Property="Opacity" Value="0.8" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="{x:Static p:Strings.Log_ColumnMessage}" Width="*" MinWidth="200" ClipboardContentBinding="{Binding FullText}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <!-- The exception is in the details of the selected line. -->
+                                <materialDesign:PackIcon DockPanel.Dock="Right" Kind="ChevronDown" Width="16" Height="16" Opacity="0.6"
+                                                         VerticalAlignment="Center" Margin="6,0,0,0"
+                                                         Visibility="{Binding HasException, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                <TextBlock Text="{Binding Message}" ToolTip="{Binding Message}"
+                                           TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                            </DockPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <!-- A read-only text box: the message and the exception can be selected and copied in part. -->
+                    <TextBox Text="{Binding FullText, Mode=OneWay}" IsReadOnly="True" TextWrapping="Wrap"
+                             FontFamily="Consolas" FontSize="12" Margin="8,2,8,8" Padding="0" BorderThickness="0"
+                             MaxHeight="320" VerticalScrollBarVisibility="Auto"
+                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                             Visibility="{Binding HasException, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+
+        <TextBlock Grid.Row="3" Text="{x:Static p:Strings.Log_Empty}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Style="{StaticResource MaterialDesignBody1TextBlock}" Opacity="0.5" IsHitTestVisible="False"
+                   Visibility="{Binding IsEmpty, Converter={StaticResource BooleanToVisibilityConverter}}" />
+    </Grid>
+</UserControl>
